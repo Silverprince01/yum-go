@@ -49,7 +49,9 @@ export const Header = ({ selectTab }) => {
 
 const styles = StyleSheet.create({
 	tabsBtns: {
-		flex: 1,
+		
+		textAlign:"center",
+		
 		flexDirection: "row",
 		alignItems: "center",
 		gap: 10,

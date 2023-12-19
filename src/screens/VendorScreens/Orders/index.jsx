@@ -8,19 +8,16 @@ import {
   TransitsCards,
 } from "./components";
 
-
 import firebase from "firebase/compat/app";
 import { FooterNav } from "../components";
 
 export const Orders = () => {
   const vendorId = firebase.auth().currentUser;
   const [selectedTab, setSelectedTab] = useState(1);
-  const [total, setTotal] = useState(0);
-  const [vendor, setVendor] = useState("")
-  const [orders, setOrders] = useState(null);
-  const [items, setItems] = useState(null);
+
+  const [orders, setOrders] = useState([]);
+
   const [confirm, setConfirm] = useState(false);
-  const [validOrder, setValidOrder] = useState(null);
 
   const selectTab = (key) => {
     setSelectedTab(key);
@@ -38,26 +35,12 @@ export const Orders = () => {
       console.log(ordersWithIds);
       setOrders(ordersWithIds);
       ordersWithIds?.map((ordersWithId) => {
-        const confirmedOrders = ordersWithId?.order.orderss.filter((ord) => {
+        ordersWithId?.order.orderss.filter((ord) => {
           ord.confirmation;
 
           setConfirm(ord.confirmation);
         });
-        setTotal(confirmedOrders.total);
-        // console.log(confirmedOrders);
-        confirmedOrders?.map((confirm) => {
-          const vendorOrders = confirm?.order.filter(
-            (orde) => {orde.to === vendorId.uid
-            
-            
-              setVendor(orde.to)
-            }
-          );
-          // console.log(vendorOrders);
-          setItems(vendorOrders);
-        });
       });
-      console.log(vendor);
     } catch (error) {
       console.log(error);
     }
@@ -65,12 +48,10 @@ export const Orders = () => {
   useEffect(() => {
     getOrders();
   }, []);
-  const acceptOrder = async () => {};
+
   const renderSelectedTabContent = (key) => {
     if (key == 1) {
-      return (
-        <InstantOrdersCards orders={orders} confirm={confirm} />
-      );
+      return <InstantOrdersCards orders={orders} confirm={confirm} />;
     } else if (key == 2) {
       return <PreOrdersCards />;
     } else if (key == 3) {
@@ -98,7 +79,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#E7E7E7",
     gap: 6,
-
     width: "100%",
     overflow: "hidden",
   },

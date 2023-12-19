@@ -11,16 +11,16 @@ import {
 export const InstantOrdersCards = ({ orders }) => {
   return (
     <View style={styles.cardsWrapper}>
-      {orders?.map((order) => {
+      {orders?.map((order,id) => {
         return (
-          <InstantOrdersCard key={order.id} order={order}  />
+          <InstantOrdersCard key={id} order={order}  />
         );
       })}
     </View>
   );
 };
 
-const InstantOrdersCard = ({ order }) => {
+const InstantOrdersCard = ({ order, key }) => {
   const [loading, setLoading] = useState(false);
   const [rejectLoad, setRejectLoad] = useState(false);
   console.log(order);
@@ -81,8 +81,8 @@ const InstantOrdersCard = ({ order }) => {
     } catch (error) {}
   };
   return (
-    <View>
-      {display ?   (
+    <View key={key}>
+      
         <View>
           {confirm === true && (
             <View style={styles.cardWrapper}>
@@ -155,7 +155,7 @@ const InstantOrdersCard = ({ order }) => {
             </View>
           )}
         </View>
-      ):null}
+      
     </View>
   );
 };
@@ -182,7 +182,7 @@ const styles = StyleSheet.create({
   },
   cardTopText: {
     color: "#949090",
-    fontFamily: "Roboto",
+    // fontFamily: "Roboto",
     fontSize: 10,
     fontStyle: "normal",
     fontWeight: 400,
@@ -195,7 +195,7 @@ const styles = StyleSheet.create({
   },
   cardMiddleText: {
     color: "#151515",
-    fontFamily: "Roboto",
+    // fontFamily: "Roboto",
     fontSize: 12,
     fontStyle: "normal",
     fontWeight: 500,
@@ -215,7 +215,7 @@ const styles = StyleSheet.create({
   acceptBtn: {
     color: "#FFF",
     textAlign: "center",
-    fontFamily: "Roboto",
+    // fontFamily: "Roboto",
     fontSize: 12,
     fontStyle: "normal",
     fontWeight: 400,
@@ -233,7 +233,7 @@ const styles = StyleSheet.create({
   rejectBtn: {
     color: "#C4C4C4",
     textAlign: "center",
-    fontFamily: "Roboto",
+    // fontFamily: "Roboto",
     fontSize: 12,
     fontStyle: "normal",
     fontWeight: 400,

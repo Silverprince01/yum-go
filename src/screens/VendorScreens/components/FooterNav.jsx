@@ -127,7 +127,7 @@ export const FooterNav = () => {
 const styles = StyleSheet.create({
 	nav: {
 		position: "absolute",
-		bottom: "0",
+		bottom: 0,
 
 		// flex: 1,
 		flexDirection: "row",

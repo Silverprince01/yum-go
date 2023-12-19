@@ -24,15 +24,17 @@ export const TransitsCards = () => {
   return (
     <View style={styles.cardsWrapper}>
       {transitOrders.map((order) => {
-        const { name, orderId, time, deliveryAddress, ordersList } = order;
+        
+        
 
         return (
           <TransitCards
-            name={name}
-            orderId={orderId}
-            time={time}
-            deliveryAddress={deliveryAddress}
-            ordersList={ordersList}
+          order={order}
+            // name={name}
+            // orderId={orderId}
+            // time={time}
+            // deliveryAddress={deliveryAddress}
+            // ordersList={ordersList}
           />
         );
       })}
@@ -40,22 +42,22 @@ export const TransitsCards = () => {
   );
 };
 
-const TransitCards = ({ name, orderId, time, deliveryAddress, ordersList }) => {
+const TransitCards = ({ order }) => {
   return (
     <View style={styles.cardWrapper}>
       <View style={{justifyContent:"space-between", flexDirection:"row", marginVertical:8}}>
         <Text style={{ color: "#949090", fontSize: 10, fontWeight: "400" }}>
-          {name}-{orderId}
+          {order.name}-{order.orderId}
         </Text>
         <Text style={{ color: "#949090", fontSize: 10, fontWeight: "400" }}>
-          {time}
+          {order.time}
         </Text>
       </View>
       <View style={{ marginVertical: 10 }}>
         <Text style={{ fontSize: 12, fontWeight: "400", color: "#151515" }}>
-          {deliveryAddress}
+          {order.deliveryAddress}
         </Text>
-        <Text style={{ fontSize: 10, fontWeight: "300" }}>{ordersList}</Text>
+        <Text style={{ fontSize: 10, fontWeight: "300" }}>{order.ordersList}</Text>
       </View>
 
       <View style={styles.deliveryUpdate}>

@@ -52,7 +52,6 @@ export const Log = () => {
           <TextInput
             style={styles.input}
             placeholder="yumgo@gmail.com"
-            inputMode="number"
             placeholderTextColor={"#0000004D"}
             value={email}
             onChangeText={setEmail}
@@ -64,7 +63,6 @@ export const Log = () => {
           <TextInput
             style={styles.input}
             placeholder="***********"
-            inputMode="number"
             placeholderTextColor={"#0000004D"}
             value={password}
             onChangeText={setPassword}
@@ -79,7 +77,7 @@ export const Log = () => {
         </View>
       </View>
 
-      <View style={{ position: "absolute", bottom: 30, width: "90%" }}>
+      <View style={{ position: "absolute", bottom: 30, width: "110%", paddingHorizontal:20 }}>
         <OrangeButton
           value={"Log In"}
           loading={loading}
@@ -105,9 +103,9 @@ const styles = StyleSheet.create({
   },
   header: {
     color: "#FD6A00",
-    fontSize: "24px",
+    fontSize: 24,
     fontWeight: 700,
-    lineHeight: "28.14px",
+    lineHeight: 28.14,
     paddingVertical: 20,
   },
   inputContainer: {
@@ -121,7 +119,7 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 6,
     borderColor: "#FF6600",
-    borderWidth: "1px",
+    borderWidth: 1,
     width: "100%",
   },
   eye: {
@@ -139,9 +137,5 @@ const styles = StyleSheet.create({
     marginLeft: 10,
     color: "#FD6A00",
   },
-  button: {
-    position: "absolute",
-    bottom: -160,
-    width: "90%",
-  },
+  
 });

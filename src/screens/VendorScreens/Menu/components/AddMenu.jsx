@@ -189,7 +189,7 @@ export const AddMenu = ({ uid }) => {
 const styles = StyleSheet.create({
   body: {
     paddingHorizontal: 17,
-    paddingBottom: 80,
+    marginBottom: 80,
   },
   input: {
     backgroundColor: "#FFFCFB",

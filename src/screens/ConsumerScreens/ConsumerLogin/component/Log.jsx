@@ -38,7 +38,6 @@ export const Log = () => {
           <TextInput
             style={styles.input}
             placeholder="yumgo@gmail.com"
-            inputMode="number"
             placeholderTextColor={"#0000004D"}
             value={email}
             onChangeText={setEmail}
@@ -50,7 +49,6 @@ export const Log = () => {
           <TextInput
             style={styles.input}
             placeholder="***********"
-            inputMode="number"
             placeholderTextColor={"#0000004D"}
             value={password}
             onChangeText={setPassword}
@@ -68,7 +66,7 @@ export const Log = () => {
         style={{
           position: "absolute",
           bottom: 30,
-          width: "100%",
+          width: "110%",
           paddingHorizontal: 10,
         }}
       >

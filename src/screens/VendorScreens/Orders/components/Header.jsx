@@ -32,7 +32,7 @@ export const Header = ({ selectTab }) => {
 
 	return (
 		<HeaderContainer>
-			<HeaderTitle style={styles.title} value="Orders" />
+			<HeaderTitle style={styles.title} value="Order" />
 
 			<View style={styles.tabsBtns}>
 				{subPages.map((page) => (
@@ -49,7 +49,7 @@ export const Header = ({ selectTab }) => {
 
 const styles = StyleSheet.create({
 	tabsBtns: {
-		flex: 1,
+		// flex: 1,
 		flexDirection: "row",
 		alignItems: "center",
 		gap: 10,

@@ -6,15 +6,15 @@ import { OrangeButton } from "../../../../components/button/OrangeButton";
 export const AwaitingPickupCards = ({ orders }) => {
   return (
     <View style={styles.cardsWrapper}>
-      {orders?.map((order) => {
-        return <AwaitingPickupsCard key={order.id} order={order} />;
+      {orders?.map((order,id) => {
+        return <AwaitingPickupsCard key={id} order={order} />;
       })}
     </View>
   );
 };
 
-const AwaitingPickupsCard = ({ order }) => {
-  const [consumer, setConsumer] = useState(null);
+const AwaitingPickupsCard = ({ order, key }) => {
+  const [consumer, setConsumer] = useState({});
   const vendorId = firebase.auth().currentUser;
 
   const consumerCollection = firebase.firestore().collection("consumers");
@@ -44,7 +44,7 @@ const AwaitingPickupsCard = ({ order }) => {
   return (
     <View>
       {accepted && (
-        <View>
+        <View key={key}>
           {confirm === true && (
             <View style={styles.cardWrapper}>
               <View style={styles.cardTop}>
@@ -60,7 +60,7 @@ const AwaitingPickupsCard = ({ order }) => {
                       <View style={{ paddingBottom: 10 }}>
                         {ord?.order.map((or, ide) => {
                           return (
-                            <View>
+                            <View key={ide}>
                               {or.to === vendorId.uid && (
                                 <View
                                   key={ide}
@@ -136,7 +136,7 @@ const styles = StyleSheet.create({
 	  },
 	  cardTopText: {
 		color: "#949090",
-		fontFamily: "Roboto",
+		// fontFamily: "Roboto",
 		fontSize: 10,
 		fontStyle: "normal",
 		fontWeight: 400,
@@ -149,7 +149,7 @@ const styles = StyleSheet.create({
 	  },
 	  cardMiddleText: {
 		color: "#151515",
-		fontFamily: "Roboto",
+		// fontFamily: "Roboto",
 		fontSize: 12,
 		fontStyle: "normal",
 		fontWeight: 500,

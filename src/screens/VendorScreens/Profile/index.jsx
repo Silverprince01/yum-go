@@ -87,7 +87,7 @@ const MainContent = () => {
 						style={{
 							color: "#000",
 
-							fontFamily: "Roboto",
+							// fontFamily: "Roboto",
 							fontSize: 20,
 							fontWeight: 500,
 							lineHeight: 27 /* 135% */,
@@ -100,7 +100,7 @@ const MainContent = () => {
 						style={{
 							color: "#000",
 
-							fontFamily: "Roboto",
+							// fontFamily: "Roboto",
 							fontSize: 10,
 							fontWeight: 300,
 							lineHeight: 14 /* 140% */,
@@ -113,7 +113,7 @@ const MainContent = () => {
 					<Text
 						style={{
 							color: "#000",
-							fontFamily: "Roboto",
+							// fontFamily: "Roboto",
 							fontSize: 12,
 							fontWeight: 400,
 							lineHeight: 15,

@@ -38,16 +38,14 @@ export const PreOrdersCards = () => {
 
 	return (
 		<View style={styles.cardsWrapper}>
-			{orders.map((order) => {
-				const { name, orderId, time, totalPrice, ordersList } = order;
+			{orders.map((order,id) => {
+				
 
 				return (
 					<PreOrdersCard
-						name={name}
-						orderId={orderId}
-						time={time}
-						totalPrice={totalPrice}
-						ordersList={ordersList}
+					order={order}
+						key={id}
+
 					/>
 				);
 			})}
@@ -55,24 +53,25 @@ export const PreOrdersCards = () => {
 	);
 };
 
-const PreOrdersCard = ({ name, orderId, time, totalPrice, ordersList }) => {
+const PreOrdersCard = ({ order,key }) => {
 	return (
-		<View style={styles.cardWrapper}>
+		<View key={key} style={styles.cardWrapper}>
 			<View style={styles.cardTop}>
 				<Text style={styles.cardTopText}>
-					{name} - Order {orderId}
+					{order.name} - Order {order.orderId}
 				</Text>
 
-				<Text style={styles.cardTopText}>{time}</Text>
+				<Text style={styles.cardTopText}>{order.time}</Text>
 			</View>
 
 			<View style={styles.cardMiddle}>
 				<View>
-					{ordersList.map((ord) => {
-						const { item, count } = ord;
+					{order.ordersList.map((ord,id) => {
+						// const { item, count } = ord;
 
 						return (
 							<View
+							key={id}
 								style={{
 									width: 90,
 									flexDirection: "row",
@@ -80,11 +79,11 @@ const PreOrdersCard = ({ name, orderId, time, totalPrice, ordersList }) => {
 								}}
 							>
 								<Text style={styles.cardMiddleText}>
-									{item}
+									{ord.item}
 								</Text>
 
 								<Text style={styles.cardMiddleText}>
-									x{count}
+									x{ord.count}
 								</Text>
 							</View>
 						);
@@ -95,7 +94,7 @@ const PreOrdersCard = ({ name, orderId, time, totalPrice, ordersList }) => {
 					<Text
 						style={[styles.cardMiddleText, { textAlign: "right" }]}
 					>
-						{totalPrice}
+						{order.totalPrice}
 					</Text>
 
 					<Pressable style={styles.acceptBtnCtn}>
@@ -129,7 +128,6 @@ const styles = StyleSheet.create({
 	},
 	cardTopText: {
 		color: "#949090",
-		fontFamily: "Roboto",
 		fontSize: 10,
 		fontStyle: "normal",
 		fontWeight: 400,
@@ -141,7 +139,6 @@ const styles = StyleSheet.create({
 	},
 	cardMiddleText: {
 		color: "#151515",
-		fontFamily: "Roboto",
 		fontSize: 12,
 		fontStyle: "normal",
 		fontWeight: 500,
@@ -160,12 +157,11 @@ const styles = StyleSheet.create({
 		width: 100,
 	},
 	acceptBtn: {
-		color: "#FFF",
-		textAlign: "center",
-		fontFamily: "Roboto",
-		fontSize: 12,
-		fontStyle: "normal",
-		fontWeight: 400,
-		lineHeight: "normal",
+		color: "#fff",
+		// textAlign: "center",
+		// fontSize: 18,
+		// fontStyle: "normal",
+		// fontWeight: "400",
+		
 	},
 });

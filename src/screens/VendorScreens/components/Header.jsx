@@ -33,10 +33,9 @@ export const HeaderTitle = ({ value }) => {
 const headerTitleStyles = StyleSheet.create({
 	title: {
 		color: "#000",
-		fontFamily: "Roboto",
 		fontSize: 20,
 		fontStyle: "normal",
-		fontWeight: 400,
+		fontWeight: "400",
 		lineHeight: 27,
 	},
 });
@@ -96,8 +95,9 @@ const btnStyles = StyleSheet.create({
 	},
 	text: {
 		fontSize: 10,
-		fontWeight: 400,
+		fontWeight: "400",
 		color: "#F60",
+		textAlign:"center"
 	},
 	textPressed: {
 		color: "white",

@@ -40,19 +40,16 @@ export const Availables = () => {
   ];
 
   return (
-    <View style={styles.cardsWrapper}>
-      {orders.map((menu) => {
-        const { id, food, portion, availabilty, pics, amount } = menu;
+    <View >
+      {orders.map((menu, id) => {
+        
 
         return (
-          availabilty && (
+          menu.availabilty && (
             <Available
-              id={id}
-              food={food}
-              portion={portion}
-              availabilty={availabilty}
-              pics={pics}
-              amount={amount}
+            menu={menu}
+              key={id}
+              
             />
           )
         );
@@ -61,20 +58,20 @@ export const Availables = () => {
   );
 };
 
-const Available = ({ id, food, portion, availabilty, pics, amount }) => {
+const Available = ({ menu,key }) => {
   return (
-    <View key={id} style={styles.cardWrapper}>
+    <View key={key} style={styles.cardWrapper}>
       <View>
-        <Text>{food}</Text>
-        <Text>{portion}</Text>
-        <Text>{amount}</Text>
+        <Text>{menu.food}</Text>
+        <Text>{menu.portion}</Text>
+        <Text>{menu.amount}</Text>
       </View>
 
       <View style={styles.imageBackground}>
-        <Image source={pics} style={{ width: "100%", height: 27 }} />
+        <Image source={menu.pics} style={{ width: "100%", height: 27 }} />
         <View
           style={[
-            availabilty
+            menu.availabilty
               ? { backgroundColor: "#FD832A" }
               : { backgroundColor: "#D4C2B5" },
             {
@@ -86,7 +83,7 @@ const Available = ({ id, food, portion, availabilty, pics, amount }) => {
           ]}
         >
           <Text style={{ color: "white", fontSize: 10 }}>
-            {availabilty ? "Available" : "Unavailaable"}
+            {menu.availabilty ? "Available" : "Unavailaable"}
           </Text>
         </View>
       </View>

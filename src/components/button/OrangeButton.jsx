@@ -73,6 +73,6 @@ const styles = StyleSheet.create({
   },
   textPressed: {
     color: "#FF6600",
-    fontWeight: 700,
+    fontWeight: "700",
   },
 });

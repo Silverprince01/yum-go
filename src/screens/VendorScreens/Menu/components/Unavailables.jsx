@@ -41,18 +41,19 @@ export const Unavailables = () => {
 
   return (
     <View style={styles.cardsWrapper}>
-      {orders.map((menu) => {
-        const { id, food, portion, availabilty, pics, amount } = menu;
+      {orders.map((menu,id) => {
+     
 
         return (
-          availabilty===false && (
+          menu.availabilty===false && (
             <Unavailable
-              id={id}
-              food={food}
-              portion={portion}
-              availabilty={availabilty}
-              pics={pics}
-              amount={amount}
+            menu={menu}
+              key={id}
+              // food={food}
+              // portion={portion}
+              // availabilty={availabilty}
+              // pics={pics}
+              // amount={amount}
             />
           )
         );
@@ -61,20 +62,20 @@ export const Unavailables = () => {
   );
 };
 
-const Unavailable = ({ id, food, portion, availabilty, pics, amount }) => {
+const Unavailable = ({ menu,key }) => {
   return (
-    <View key={id} style={styles.cardWrapper}>
+    <View key={key} style={styles.cardWrapper}>
       <View>
-        <Text>{food}</Text>
-        <Text>{portion}</Text>
-        <Text>{amount}</Text>
+        <Text>{menu.food}</Text>
+        <Text>{menu.portion}</Text>
+        <Text>{menu.amount}</Text>
       </View>
 
       <View style={styles.imageBackground}>
-        <Image source={pics} style={{ width: "100%", height: 27 }} />
+        <Image source={menu.pics} style={{ width: "100%", height: 27 }} />
         <View
           style={[
-            availabilty
+            menu.availabilty
               ? { backgroundColor: "#FD832A" }
               : { backgroundColor: "#D4C2B5" },
             {
@@ -86,7 +87,7 @@ const Unavailable = ({ id, food, portion, availabilty, pics, amount }) => {
           ]}
         >
           <Text style={{ color: "white", fontSize: 10 }}>
-            {availabilty ? "Available" : "Unavailaable"}
+            {menu.availabilty ? "Available" : "Unavailaable"}
           </Text>
         </View>
       </View>
