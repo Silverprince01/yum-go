@@ -1,7 +1,6 @@
-import React, { useContext, useEffect, useState } from "react";
-import { View, Text, Image, StyleSheet } from "react-native";
-import AddCircle from "../../../assets/add-circle.png";
-import { AuthContext } from "../../screens/ConsumerScreens/Authentication";
+import React from "react";
+import { View, Text, StyleSheet } from "react-native";
+
 export const YourOrder = ({ orders, totalP, sume, vendor }) => {
   return (
     <View>

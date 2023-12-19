@@ -16,9 +16,9 @@ import { OrderInfo } from "../../../../components/OrderInfo/OrderInfo";
 import { AuthContext } from "../../Authentication";
 import { OrangeButton } from "../../../../components/button/OrangeButton";
 export const Check = () => {
-  const [orders, setOrders] = useState(null);
-  const [totalP, setTotalP] = useState(null);
-  const [vendor, setVendor] = useState(null);
+  const [orders, setOrders] = useState([]);
+  const [totalP, setTotalP] = useState(0);
+  const [vendor, setVendor] = useState({});
   const [loading, setLoading] = useState(false);
   const [sume, setSum] = useState(0);
   const navigation = useNavigation();

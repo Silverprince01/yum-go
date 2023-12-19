@@ -3,7 +3,7 @@ import React from "react";
 import TickOrange from "../../../assets/tickOrange.png";
 import TickBlack from "../../../assets/tickBlack.png";
 
-export const TrackOrderComponent = ({ order }) => {
+export const TrackOrderComponent = () => {
   const orderComponents = [
     {
       id: 1,

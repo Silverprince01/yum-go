@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
-import { Pressable, StyleSheet, Text, View, Image } from "react-native";
+import { StyleSheet, Text, View, Image } from "react-native";
 import firebase from "firebase/compat/app";
-import { doc, getDoc } from "firebase/firestore";
+
 import "firebase/auth";
-import { database } from "../../../../firebaseConfig";
+
 import Food1 from "../../../../../assets/food1.png";
 import Food2 from "../../../../../assets/food2.png";
 import Food3 from "../../../../../assets/food3.png";
@@ -31,12 +31,9 @@ export const AllMenus = () => {
     }
   };
   useEffect(() => {
-    // const fetchData = async () => {
+    
     getMenuItems();
-    // console.log(menus);
-    // };
-
-    // fetchData();
+    
   }, []);
 
   const orders = [

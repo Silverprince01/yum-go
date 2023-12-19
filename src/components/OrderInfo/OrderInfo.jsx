@@ -11,10 +11,9 @@ import firebase from "firebase/compat/app";
 import { database } from "../../firebaseConfig";
 import { AuthContext } from "../../screens/ConsumerScreens/Authentication";
 import ArrowRight from "../../../assets/arrow-right.png";
-import { OrangeButton } from "../button/OrangeButton";
 export const OrderInfo = () => {
   const [option, setOption] = useState(0);
-  //   console.log(option);
+  
   const userId = firebase.auth().currentUser;
   const { consumer } = useContext(AuthContext);
   const [consumers, setConsumers] = consumer;
@@ -167,7 +166,7 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 6,
     borderColor: "#FF6600",
-    borderWidth: "1px",
+    borderWidth: 1,
     width: "100%",
     height: 105,
     marginVertical: 10,

@@ -9,15 +9,15 @@ import {
 } from "react-native";
 import { Picker } from "@react-native-picker/picker";
 import firebase from "firebase/compat/app";
-import React, { useEffect, useState } from "react";
-import ArrowDown from "../../../../../assets/arrow-down.png";
+import React, { useState } from "react";
+
 import Camera from "../../../../../assets/camera.png";
 import { OrangeButton } from "../../../../components/button/OrangeButton";
 
 import { database } from "../../../../firebaseConfig";
 import * as ImagePicker from "expo-image-picker";
 export const AddMenu = ({ uid }) => {
-  // const [selectedValue, setSelectedValue] = useState("per portion");
+  
 
   const [loading, setLoading] = useState(false);
   const [menuDesc, setMenuDesc] = useState({
@@ -134,14 +134,7 @@ export const AddMenu = ({ uid }) => {
               <Picker.Item label="per unit" value="per unit" />
             </Picker>
 
-            {/* TextInput */}
-            {/* <TextInput
-        style={styles.textInput}
-        placeholder="Enter text (max 100 characters)"
-        maxLength={100}
-        value={textInputValue}
-        onChangeText={(text) => setTextInputValue(text)}
-      /> */}
+           
           </View>
         </View>
         <View style={{ marginVertical: 10 }}>

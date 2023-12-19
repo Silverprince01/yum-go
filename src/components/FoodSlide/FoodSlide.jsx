@@ -1,17 +1,13 @@
 import { useState, useEffect } from "react";
 import {
   View,
-  Text,
-  Animated,
   ScrollView,
   Dimensions,
-  TouchableOpacity,
   Image,
   StyleSheet,
-  PanResponder,
+  
 } from "react-native";
-// import Carousel from "react-native-swipeable-carousel";
-// import Food1 from "../../../assets/food1.png";
+
 
 export const FoodSlide = () => {
   const deviceWidth = Dimensions.get("window").width;
@@ -69,25 +65,11 @@ export const FoodSlide = () => {
           </View>
         </View>
       </ScrollView>
-      {/* <View style={{ flexDirection: "row", justifyContent: "center" }}>
-        {images.map((_, index) => (
-          <TouchableOpacity
-            key={index}
-            onPress={() => handleSwipe(index < currentIndex ? "left" : "right")}
-            style={{
-              width: 10,
-              height: 10,
-              backgroundColor: index === currentIndex ? "blue" : "gray",
-              margin: 5,
-              borderRadius: 5,
-            }}
-          />
-        ))}
-      </View> */}
+      
     </View>
   );
 };
-// { padding: 0, width: '100%' }
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,

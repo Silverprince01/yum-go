@@ -7,11 +7,10 @@ export const OpeningScreen = () => {
 	const [nextScreen, setNextScreen] = useState(1);
 
 	useEffect(() => {
-		// Toggle between components after a specified time interval
+		
 		const timeout = setTimeout(() => {
 			setNextScreen(2);
-		}, 5000); // Toggle every 5 seconds (adjust the duration as needed)
-		// console.log(timeout);
+		}, 5000); 
 
 		return () => clearTimeout(timeout);
 	}, [nextScreen]);

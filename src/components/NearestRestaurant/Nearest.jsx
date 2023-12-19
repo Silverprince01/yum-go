@@ -1,25 +1,61 @@
-import React from "react";
-import { View,ScrollView, Text,Image, StyleSheet } from "react-native";
-import Pizza from "../../../assets/pizza.png";
-import Spag from "../../../assets/spag.png";
-import Rice from "../../../assets/rice.png";
+import React, {useState, useEffect, useContext } from "react";
+import firebase from "firebase/compat/app";
+import { database } from "../../firebaseConfig";
+import {
+  Text,
+  View,
+  ScrollView,
+  Image,
+  StyleSheet,
+  Pressable,
+} from "react-native";
+import Pen from "../../../assets/pen.png";
+import Location from "../../../assets/location.png";
+import Clock from "../../../assets/clock.png";
+import { AuthContext } from "../../screens/ConsumerScreens/Authentication";
+import { useNavigation } from "@react-navigation/native";
 export const Nearest = () => {
+  const userId = firebase.auth().currentUser;
+  const {  vendorIdentity } = useContext(AuthContext);
+  
+
+  const [vendorId, setVendorId] = vendorIdentity;
+  const [vendors, setVendors] = useState([]);
+
+  const fetchVendors = async () => {
+    try {
+      const snapshot = await firebase.firestore().collection("vendors").get();
+      const vendorData = snapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+
+      setVendors(vendorData);
+      console.log(vendors);
+    } catch (error) {
+      console.error("Error fetching vendors:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchVendors();
+  }, []);
+
+  const navigation = useNavigation();
+
+  const vendorNavigate = (id) => {
+    setVendorId(id);
+    navigation.navigate("Vendor");
+  };
+  
+
   return (
     <View style={styles.body}>
-      <View
-        style={{
-          flexDirection: "row",
-          alignItems: "center",
-          marginBottom: 10,
-        }}
-      >
-        <Text
-          style={{ fontSize: 24, fontWeight: 500, marginLeft: 5 }}
-        >
-          Nearest Restaurant
+      
+      <Text style={{ fontSize: 24, fontWeight: "500", marginLeft: 5, marginBottom:20 }}>
+          All Restaurant
         </Text>
-      </View>
-      <ScrollView
+            <ScrollView
         horizontal={true}
         showsHorizontalScrollIndicator={false}
         contentContainerStyle={{
@@ -28,54 +64,30 @@ export const Nearest = () => {
           flexDirection: "row",
         }}
       >
-        <View style={styles.vendorContainer}>
-          <Image source={Pizza} style={styles.foodImage} />
-          <Text style={styles.vendorName}>Abdullah's Pizza</Text>
-          <View style={styles.order}>
-            <Text style={styles.orderText}>Min-Order</Text>
-            <Text style={styles.orderText}>#1,500</Text>
-          </View>
-          <View style={styles.order}>
-            <Text style={styles.orderText}>Delivery Fee</Text>
-            <Text style={styles.orderText}>#200</Text>
-          </View>
-        </View>
-        <View style={styles.vendorContainer}>
-          <Image source={Spag} style={styles.foodImage} />
-          <Text style={styles.vendorName}>Kemi's Spag</Text>
-          <View style={styles.order}>
-            <Text style={styles.orderText}>Min-Order</Text>
-            <Text style={styles.orderText}>#2,500</Text>
-          </View>
-          <View style={styles.order}>
-            <Text style={styles.orderText}>Delivery Fee</Text>
-            <Text style={styles.orderText}>#300</Text>
-          </View>
-        </View>
-        <View style={styles.vendorContainer}>
-          <Image source={Rice} style={styles.foodImage} />
-          <Text style={styles.vendorName}>Fuad's Delicacy</Text>
-          <View style={styles.order}>
-            <Text style={styles.orderText}>Min-Order</Text>
-            <Text style={styles.orderText}>#2,500</Text>
-          </View>
-          <View style={styles.order}>
-            <Text style={styles.orderText}>Delivery Fee</Text>
-            <Text style={styles.orderText}>#300</Text>
-          </View>
-        </View>
-        <View style={styles.vendorContainer}>
-          <Image source={Pizza} style={styles.foodImage} />
-          <Text style={styles.vendorName}> Abdullah's Kitchen</Text>
-          <View style={styles.order}>
-            <Text style={styles.orderText}>Min-Order</Text>
-            <Text style={styles.orderText}>#2,500</Text>
-          </View>
-          <View style={styles.order}>
-            <Text style={styles.orderText}>Delivery Fee</Text>
-            <Text style={styles.orderText}>#300</Text>
-          </View>
-        </View>
+        {vendors.map((vendor) => {
+          return (
+            <Pressable
+              key={vendor.id}
+              onPress={() => {
+                vendorNavigate(vendor.id);
+              }}
+              style={styles.vendorContainer}
+            >
+              <Image source={{ uri: vendor.image }} style={styles.foodImage} />
+              <Text style={styles.vendorName}>{vendor.businessName}</Text>
+              <View style={styles.order}>
+                <Text style={styles.orderText}>Min-Order</Text>
+                <Text style={styles.orderText}>#{vendor.minOrder}</Text>
+              </View>
+              <View style={styles.order}>
+                <Text style={styles.orderText}>Delivery Fee</Text>
+                <Text style={styles.orderText}>#{vendor.deliveryFee}</Text>
+              </View>
+            </Pressable>
+          );
+        })}
+
+        
       </ScrollView>
     </View>
   );
@@ -87,8 +99,21 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     paddingVertical: 15,
   },
-  
-  
+  adddress: {
+    justifyContent: "space-between",
+    flexDirection: "row",
+    alignItems: "center",
+    marginBottom: 10,
+  },
+  location: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+
+  icon: {
+    width: 12,
+    height: 12,
+  },
   vendorContainer: {
     paddingRight: 8,
   },
@@ -98,7 +123,7 @@ const styles = StyleSheet.create({
     marginTop: 5,
   },
   order: {
-    width: 90,
+    
     justifyContent: "space-between",
     flexDirection: "row",
   },

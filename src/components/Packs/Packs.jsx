@@ -6,15 +6,15 @@ import { AuthContext } from "../../screens/ConsumerScreens/Authentication";
 export const Packs = () => {
   const { vendorIdentity } = useContext(AuthContext);
   const [vendorId, setVendorId] = vendorIdentity;
-  const [orders, setOrders] = useState(null);
-  const [totalP, setTotalP] = useState(null);
+  const [orders, setOrders] = useState([]);
+  const [totalP, setTotalP] = useState(0);
   const orderCollections = database.collection("orders");
   const userId = firebase.auth().currentUser;
   const getOrders = async () => {
     try {
       const orderData = await orderCollections.doc(userId.uid).get();
 
-      // console.log(orderData.data().orderss);
+      
       setOrders(orderData.data().orderss);
 
       const totalOrder = orderData.data().orderss.map((order) => {
@@ -65,7 +65,7 @@ export const Packs = () => {
                   <Text style={{ fontSize: 16, fontWeight: 500 }}>
                     Pack {id + 1}
                   </Text>
-                  {/* <Text style={{ fontSize: 16, fontWeight: 300 }}></Text> */}
+      
                 </View>
               </View>
               {/* food items */}

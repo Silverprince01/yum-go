@@ -1,4 +1,4 @@
-import { Pressable, StyleSheet, Text, View } from "react-native";
+import {  StyleSheet, Text, View } from "react-native";
 import React, { useState,useEffect } from "react";
 import firebase from "firebase/compat/app";
 import { OrangeButton } from "../../../../components/button/OrangeButton";
@@ -27,11 +27,11 @@ const AwaitingPickupsCard = ({ order }) => {
       .doc(order.id)
       .get()
       .then((data) => {
-        // data?.forEach((newData) => {
+        
         const myData = data.data();
 
         setConsumer(myData);
-        // });
+        
 
       })
       .catch((error) => {

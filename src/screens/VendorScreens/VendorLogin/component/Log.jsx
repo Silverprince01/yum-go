@@ -1,28 +1,18 @@
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import {
   View,
   Text,
   TextInput,
   StyleSheet,
-  ActivityIndicator,
-  Image,
   Pressable,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import eyeSlash from "../../../../../assets/eye-slash.png";
 import { OrangeButton } from "../../../../components/button/OrangeButton";
-import { SpecialButton } from "../../../../components/button/SpecialButton";
+
 import firebase from "firebase/compat/app";
-import { FirebaseRecaptchaVerifierModal } from "expo-firebase-recaptcha";
+
 import "firebase/auth";
-import { auth } from "../../../../firebaseConfig";
-import { getApp } from "firebase/app";
-import {
-  getAuth,
-  signInWithCredential,
-  PhoneAuthProvider,
-} from "firebase/auth";
-import { firebaseConfig } from "../../../../firebaseConfig";
+
 
 export const Log = () => {
   const navigation = useNavigation();

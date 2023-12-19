@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, StyleSheet } from "react-native";
 import { SearchBar } from "./component/SearchBar";
 import { SearchCard } from "../../../components/Card/SearchCard";
 import Pizza from "../../../../assets/pizza.png";

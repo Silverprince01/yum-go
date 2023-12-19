@@ -1,4 +1,4 @@
-import { View, Image, Text, StyleSheet, Pressable } from "react-native";
+import { View, Image, Text, StyleSheet } from "react-native";
 import { OrangeButton } from "../../../components/button/OrangeButton";
 import image from "../../../../assets/yumDark.png";
 import { useNavigation } from "@react-navigation/native";

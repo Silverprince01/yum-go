@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { View, Text, Image, Pressable, StyleSheet } from "react-native";
 import Heart from "../../../assets/heart.png";
 import HeartBold from "../../../assets/heartbold.png";
-import Pizza from "../../../assets/pizza.png";
 export const SearchCard = ({ spotName, img, deliveryFee, minOrder, id }) => {
   const [fav, setFav] = useState(false);
   return (

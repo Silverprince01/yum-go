@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import firebase from "firebase/compat/app"
 import "firebase/auth";
-import { View, StyleSheet, Text } from "react-native";
+import { View, StyleSheet } from "react-native";
 import {
   Header,
   AllMenus,

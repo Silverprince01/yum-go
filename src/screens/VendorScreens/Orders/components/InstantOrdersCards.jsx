@@ -1,12 +1,11 @@
-import { Pressable, StyleSheet, Text, View } from "react-native";
-import { useState, useEffect, useContext } from "react";
+import {  StyleSheet, Text, View } from "react-native";
+import { useState, useEffect } from "react";
 import firebase from "firebase/compat/app";
 import { database } from "../../../../firebaseConfig";
-import { AuthContext } from "../../../ConsumerScreens/Authentication";
+
 import { OrangeButton } from "../../../../components/button/OrangeButton";
 import {
   TransparentButton,
-  TrasnparentButton,
 } from "../../../../components/button/TransparentButton";
 
 export const InstantOrdersCards = ({ orders }) => {

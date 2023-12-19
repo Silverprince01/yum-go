@@ -4,11 +4,8 @@ import { NavBar } from "../../../../components/NavBar/NavBar";
 import { VendorRestaurant } from "../../../../components/VendorRestaurant/VendorRestaurant";
 export const Vendor = () => {
   return (
-    <View style={styles.body}>
-      
+    <View style={styles.body}>      
         <VendorRestaurant />
-      
-
       <View style={styles.nav}>
         <NavBar />
       </View>

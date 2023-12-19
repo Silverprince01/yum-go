@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, ScrollView } from "react-native";
+import { StyleSheet, View, ScrollView } from "react-native";
 import React from "react";
 import { Track } from "./components/Track";
 import { NavBar } from "../../../components/NavBar/NavBar";

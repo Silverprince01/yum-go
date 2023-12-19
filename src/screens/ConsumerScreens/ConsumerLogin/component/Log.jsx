@@ -1,15 +1,12 @@
-import React, { useState, useContext, useRef } from "react";
+import React, { useState, useContext } from "react";
 import { View, Text, TextInput, StyleSheet, Pressable } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { OrangeButton } from "../../../../components/button/OrangeButton";
-import { AuthContext } from "../../Authentication";
 import firebase from "firebase/compat/app";
 
 import "firebase/auth";
 
 export const Log = () => {
-  const { user } = useContext(AuthContext);
-  const [users, setUser] = user;
   const navigation = useNavigation();
 
   const [loading, setLoading] = useState(false);
@@ -17,29 +14,17 @@ export const Log = () => {
   const [password, setPassword] = useState("");
 
   const handleLogin = async () => {
-    
     setLoading(true);
     firebase
       .auth()
       .signInWithEmailAndPassword(email, password)
       .then(() => {
-        // Signed up
-        // const user = userCredential.user;
-        // ...
-        // console.log(user);
         navigation.navigate("Home");
-      }).catch((error)=>{
+      })
+      .catch((error) => {
         setLoading(false);
         console.log(error);
-
-      })
-      // .catch((error) => {
-      //   setLoading(false);
-      //   console.log(error);
-      // });
-      // });
-    
-    
+      });
   };
 
   return (
@@ -79,7 +64,14 @@ export const Log = () => {
         </View>
       </View>
 
-      <View style={{ position: "absolute", bottom: 30, width: "90%" }}>
+      <View
+        style={{
+          position: "absolute",
+          bottom: 30,
+          width: "100%",
+          paddingHorizontal: 10,
+        }}
+      >
         <OrangeButton
           value="Log In"
           loading={loading}
@@ -105,9 +97,9 @@ const styles = StyleSheet.create({
   },
   header: {
     color: "#FD6A00",
-    fontSize: "24px",
+    fontSize: 24,
     fontWeight: 700,
-    lineHeight: "28.14px",
+    lineHeight: 28.14,
     paddingVertical: 20,
   },
   inputContainer: {
@@ -121,7 +113,7 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 6,
     borderColor: "#FF6600",
-    borderWidth: "1px",
+    borderWidth: 1,
     width: "100%",
   },
   eye: {
@@ -138,10 +130,5 @@ const styles = StyleSheet.create({
   loginText: {
     marginLeft: 10,
     color: "#FD6A00",
-  },
-  button: {
-    position: "absolute",
-    bottom: -160,
-    width: "90%",
   },
 });

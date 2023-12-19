@@ -8,7 +8,7 @@ export const SpecialButton = ({ value, screenName, loading, handleSenCode }) => 
 
   const handlePress = () => {
     setPressed(true);
-    // loading()
+    
   };
   const handleRelease = () => {
     setPressed(false);

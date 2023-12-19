@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, StyleSheet, Text } from "react-native";
+import { View, StyleSheet } from "react-native";
 import {
   AwaitingPickupCards,
   Header,
@@ -7,7 +7,7 @@ import {
   PreOrdersCards,
   TransitsCards,
 } from "./components";
-import { database } from "../../../firebaseConfig";
+
 
 import firebase from "firebase/compat/app";
 import { FooterNav } from "../components";

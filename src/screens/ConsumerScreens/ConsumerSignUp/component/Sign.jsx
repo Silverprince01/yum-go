@@ -4,21 +4,15 @@ import {
   Text,
   TextInput,
   StyleSheet,
-  Image,
-  ScrollView,
   Pressable,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-// import eyeSlash from "../../../../../assets/eye-slash.png";
+
 import { TransparentButton } from "../../../../components/button/TransparentButton";
 import firebase from "firebase/compat/app";
-// Required for side-effects
-
-import { collection, addDoc } from "firebase/firestore";
 import "firebase/firestore";
-import { FirebaseRecaptchaVerifierModal } from "expo-firebase-recaptcha";
+
 import "firebase/auth";
-import { firebaseConfig } from "../../../../firebaseConfig";
 import { database } from "../../../../firebaseConfig";
 
 export const Sign = () => {

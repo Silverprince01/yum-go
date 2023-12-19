@@ -5,23 +5,20 @@ import {
   TextInput,
   StyleSheet,
   Image,
-  ScrollView,
   Pressable,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
-import eyeSlash from "../../../../../assets/eye-slash.png";
 import Camera from "../../../../../assets/camera.png";
 import { TransparentButton } from "../../../../components/button/TransparentButton";
 import firebase from "firebase/compat/app";
-import { FirebaseRecaptchaVerifierModal } from "expo-firebase-recaptcha";
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-import { collection, addDoc } from "firebase/firestore";
+
+
 import { database } from "../../../../firebaseConfig";
 
 import "firebase/auth";
 import * as ImagePicker from "expo-image-picker";
-import { firebaseConfig } from "../../../../firebaseConfig";
+
 
 export const Register = () => {
   const navigation = useNavigation();

@@ -12,12 +12,11 @@ const headerContainerStyles = StyleSheet.create({
 		padding: 17,
 		paddingTop: 50,
 
-		// borderStartStartRadius: 32,
-		// borderStartEndRadius: 32,
+		
 		borderEndStartRadius: 12,
 		borderEndEndRadius: 12,
 		backgroundColor: "#FFFCFB",
-		// shadowOffset: "0px 2px 8px",
+		
 		shadowOffset: 8,
 		shadowOpacity: 0,
 		shadowColor: "rgba(0, 0, 0, 0.25)",

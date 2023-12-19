@@ -3,7 +3,7 @@ import { View, ScrollView, StyleSheet } from "react-native";
 import { NavBar } from "../../../../components/NavBar/NavBar";
 import { Recent } from "../../../../components/RecentRestaurant/Recent";
 import { Nearest } from "../../../../components/NearestRestaurant/Nearest";
-import { Restaurant } from "../../../../components/AllRestaurant/Restaurant";
+
 export const Home = () => {
   return (
     <View style={styles.body}>
@@ -14,7 +14,6 @@ export const Home = () => {
         <View style={{ marginVertical: 10 }}>
           <Nearest />
         </View>
-        <Restaurant />
       </ScrollView>
       <View style={styles.nav}>
         <NavBar />

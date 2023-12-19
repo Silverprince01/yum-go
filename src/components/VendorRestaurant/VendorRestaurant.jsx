@@ -25,7 +25,7 @@ export const VendorRestaurant = () => {
   const navigation = useNavigation();
   const { vendorIdentity, vendor } = useContext(AuthContext);
   const [vendorId] = vendorIdentity;
-  // const [vendors, setVendors] = vendor;
+  
   const vendorCollection = database.collection("vendors");
   const [loading, setLoading] = useState(false);
   const [vendors, setVendors] = vendor;
@@ -113,7 +113,7 @@ export const VendorRestaurant = () => {
   }, []);
   return (
     <View style={styles.body}>
-      <ImageBackground source={vendors?.image} style={styles.imgbackground}>
+      <ImageBackground source={{uri:vendors?.image}} style={styles.imgbackground}>
         <Pressable onPress={() => navigation.goBack()}>
           <Image source={Back} style={styles.arowBack} />
         </Pressable>
@@ -194,7 +194,7 @@ export const VendorRestaurant = () => {
                 </View>
                 <View style={styles.foodImg}>
                   <Image
-                    source={menuItem.image}
+                    source={{uri:menuItem.image}}
                     style={{ width: 59, height: 36 }}
                   />
                   <View style={styles.foodAdd}>
@@ -248,7 +248,6 @@ const styles = StyleSheet.create({
   },
   // header
   imgbackground: {
-    width: "100",
     height: 202,
     paddingVertical: 10,
     paddingHorizontal: 17,
@@ -299,7 +298,7 @@ const styles = StyleSheet.create({
   },
   packText: {
     fontSize: 20,
-    fontWeight: 700,
+    fontWeight: "700",
     marginBottom: 12,
   },
   pack: {
@@ -337,11 +336,11 @@ const styles = StyleSheet.create({
   },
   foodText: {
     fontSize: 12,
-    fontWeight: 500,
+    fontWeight: "500",
   },
   foodDesc: {
     fontSize: 10,
-    fontWeight: 300,
+    fontWeight: "300",
   },
   foodImg: {
     justifyContent: "center",

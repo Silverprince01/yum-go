@@ -1,4 +1,4 @@
-import { Pressable, StyleSheet, Text, View, Image } from "react-native";
+import {  StyleSheet, Text, View, Image } from "react-native";
 import Food1 from "../../../../../assets/food1.png";
 import Food2 from "../../../../../assets/food2.png";
 import Food3 from "../../../../../assets/food3.png";

@@ -8,7 +8,7 @@ import { Menu } from "./Menu";
 import { Payout } from "./Payout";
 import { Profile } from "./Profile";
 
-import { AuthProvider } from "./Authentication";
+
 const VendorScreens = () => {
 	const Stack = createNativeStackNavigator();
 
