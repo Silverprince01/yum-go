@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { View, Text, TextInput, StyleSheet, Pressable } from "react-native";
+import { View, Text, TextInput, StyleSheet, Pressable, TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { OrangeButton } from "../../../../components/button/OrangeButton";
 import firebase from "firebase/compat/app";
@@ -26,7 +26,9 @@ export const Log = () => {
         console.log(error);
       });
   };
-
+const handleSignUp = () =>{
+   navigation.navigate("Consumer Sign Up")
+}
   return (
     <View style={styles.body}>
       <View>
@@ -56,9 +58,9 @@ export const Log = () => {
         </View>
         <View style={styles.login}>
           <Text>Don't have an account?</Text>
-          <Pressable onPress={() => navigation.navigate("Consumer Sign Up")}>
+          <TouchableOpacity onPress={handleSignUp}>
             <Text style={styles.loginText}>Sign Up</Text>
-          </Pressable>
+          </TouchableOpacity>
         </View>
       </View>
 

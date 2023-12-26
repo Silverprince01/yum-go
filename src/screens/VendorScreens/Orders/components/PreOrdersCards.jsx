@@ -131,7 +131,6 @@ const styles = StyleSheet.create({
 		fontSize: 10,
 		fontStyle: "normal",
 		fontWeight: 400,
-		lineHeight: "normal",
 	},
 	cardMiddle: {
 		flexDirection: "row",
@@ -142,7 +141,6 @@ const styles = StyleSheet.create({
 		fontSize: 12,
 		fontStyle: "normal",
 		fontWeight: 500,
-		lineHeight: "normal",
 	},
 	cardMiddleLeft: {
 		justifyContent: "space-between",

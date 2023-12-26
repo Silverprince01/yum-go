@@ -20,22 +20,23 @@ export const Success = () => {
       <Pressable
         style={{
           width: "100%",
-          paddingHorizontal:10,
+          paddingHorizontal: 10,
           justifyContent: "center",
           alignItems: "center",
+          marginBottom: 10,
         }}
       >
-        <OrangeButton value={"Track Order"} screenName={"Track Order"}/>
+        <OrangeButton value={"Track Order"} screenName={"Track Order"} />
       </Pressable>
       <Pressable
         style={{
           width: "100%",
-          paddingHorizontal:10,
+          paddingHorizontal: 10,
           justifyContent: "center",
           alignItems: "center",
         }}
       >
-        <OrangeButton value={"Back to Home"} screenName={"Home"}/>
+        <OrangeButton value={"Back to Home"} screenName={"Home"} />
       </Pressable>
     </View>
   );
@@ -53,10 +54,9 @@ const styles = StyleSheet.create({
     height: 24,
   },
   thanks: {
-    flex:1,
+    flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    
   },
   tick: {
     width: 100,

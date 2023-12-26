@@ -6,6 +6,7 @@ import {
   StyleSheet,
   Image,
   Pressable,
+  TouchableOpacity
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
@@ -87,6 +88,9 @@ export const Register = () => {
       });
   };
 
+  const handleLogin = () =>{
+     navigation.navigate("Vendor Login")
+  }
   return (
     <View style={styles.body}>
       <Text style={styles.header}>Register your Canteen</Text>
@@ -101,7 +105,6 @@ export const Register = () => {
             value={namee}
             style={styles.input}
             placeholder="Your Name"
-            inputMode="text"
             onChangeText={setName}
             placeholderTextColor={"#0000004D"}
           />
@@ -112,7 +115,6 @@ export const Register = () => {
             value={businessName}
             style={styles.input}
             placeholder="Your Name"
-            inputMode="text"
             onChangeText={setBusinessName}
             placeholderTextColor={"#0000004D"}
           />
@@ -124,7 +126,6 @@ export const Register = () => {
             value={phone}
             style={styles.input}
             placeholder="Phone Number"
-            keyboardType="number-pad"
             onChangeText={setPhone}
             placeholderTextColor={"#0000004D"}
           />
@@ -135,7 +136,6 @@ export const Register = () => {
             style={styles.input}
             value={email}
             placeholder="Your Email"
-            inputMode="email"
             onChangeText={setEmail}
             placeholderTextColor={"#0000004D"}
           />
@@ -147,7 +147,6 @@ export const Register = () => {
             value={address}
             placeholder="Address"
             onChangeText={setAddress}
-            inputMode="email"
             placeholderTextColor={"#0000004D"}
           />
         </View>
@@ -205,9 +204,9 @@ export const Register = () => {
       </View>
       <View style={styles.login}>
         <Text>Already have an account?</Text>
-        <Pressable onPress={() => navigation.navigate("Vendor Login")}>
+        <TouchableOpacity onPress={handleLogin}>
           <Text style={styles.loginText}>Log in</Text>
-        </Pressable>
+        </TouchableOpacity>
       </View>
 
       <TransparentButton

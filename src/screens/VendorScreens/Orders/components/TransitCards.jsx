@@ -23,12 +23,13 @@ export const TransitsCards = () => {
 
   return (
     <View style={styles.cardsWrapper}>
-      {transitOrders.map((order) => {
+      {transitOrders.map((order,id) => {
         
         
 
         return (
           <TransitCards
+          key={id}
           order={order}
             // name={name}
             // orderId={orderId}

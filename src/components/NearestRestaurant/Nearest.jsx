@@ -9,9 +9,7 @@ import {
   StyleSheet,
   Pressable,
 } from "react-native";
-import Pen from "../../../assets/pen.png";
-import Location from "../../../assets/location.png";
-import Clock from "../../../assets/clock.png";
+
 import { AuthContext } from "../../screens/ConsumerScreens/Authentication";
 import { useNavigation } from "@react-navigation/native";
 export const Nearest = () => {

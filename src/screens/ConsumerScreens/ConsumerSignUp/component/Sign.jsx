@@ -1,10 +1,13 @@
 import React, { useState, useEffect, useRef } from "react";
 import {
   View,
+  ScrollView,
   Text,
   TextInput,
   StyleSheet,
   Pressable,
+  TouchableOpacity,
+  KeyboardAvoidingView,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
@@ -74,18 +77,25 @@ export const Sign = () => {
         console.log(errorMessage);
       });
   };
+  const handleLogin = () => {
+    navigation.navigate("Log In");
+  };
+  const keyboardVerticalOffset = Platform.OS === "ios" ? 40 : 0;
   return (
-    <View style={styles.body}>
+    <ScrollView style={styles.body} >
+      <KeyboardAvoidingView
+        behavior="position"
+        style={{backgroundColor:"white", flex:1}}
+        keyboardVerticalOffset={keyboardVerticalOffset}
+      >
       <View>
         <Text style={styles.header}>Create Account</Text>
       </View>
-      <View>
         <View>
           <Text style={styles.inputText}>First Name</Text>
           <TextInput
             style={styles.input}
             placeholder="Full Name"
-            inputMode="text"
             placeholderTextColor={"#0000004D"}
             value={namee}
             onChangeText={setName}
@@ -96,7 +106,6 @@ export const Sign = () => {
           <TextInput
             style={styles.input}
             placeholder="Phone Number"
-            inputMode="number"
             placeholderTextColor={"#0000004D"}
             value={phone}
             onChangeText={setPhone}
@@ -107,7 +116,6 @@ export const Sign = () => {
           <TextInput
             style={styles.input}
             placeholder="Your Email"
-            inputMode="email"
             placeholderTextColor={"#0000004D"}
             value={email}
             onChangeText={setEmail}
@@ -118,7 +126,6 @@ export const Sign = () => {
           <TextInput
             style={styles.input}
             placeholder="Input Address"
-            inputMode="text"
             placeholderTextColor={"#0000004D"}
             value={address}
             onChangeText={setAddress}
@@ -129,37 +136,34 @@ export const Sign = () => {
           <TextInput
             style={styles.input}
             placeholder="Input Password"
-            inputMode="text"
             placeholderTextColor={"#0000004D"}
             value={password}
             onChangeText={setPassword}
           />
         </View>
-      </View>
       <View style={styles.login}>
         <Text>Already have an account?</Text>
-        <Pressable onPress={() => navigation.navigate("Log In")}>
+        <TouchableOpacity onPress={handleLogin}>
           <Text style={styles.loginText}>Log in</Text>
-        </Pressable>
+        </TouchableOpacity>
       </View>
 
       <TransparentButton loading={loading} signUp={signUp} value={"Sign Up"} />
-    </View>
+      </KeyboardAvoidingView>
+    </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
   body: {
-    flex: 1,
-    width: "100%",
-    height: "auto",
+    width: "100%",    
     paddingHorizontal: 18,
-    position: "absolute",
-    top: 200,
-    paddingVertical: 13,
+    paddingBottom:25,
     backgroundColor: "white",
-    // borderRadius: 30,
     fontSize: 16,
+    position:"absolute",
+    bottom:0,
+    zIndex:30
   },
   header: {
     color: "#FD6A00",

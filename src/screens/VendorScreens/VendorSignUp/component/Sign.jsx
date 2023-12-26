@@ -1,5 +1,12 @@
 import React, { useState } from "react";
-import { View, Text, TextInput, StyleSheet, Pressable } from "react-native";
+import {
+  View,
+  Text,
+  TextInput,
+  StyleSheet,
+  Pressable,
+  TouchableOpacity,
+} from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
 import { TransparentButton } from "../../../../components/button/TransparentButton";
@@ -15,7 +22,7 @@ export const Sign = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errormessage, setErrorMessage] = useState("");
 
-  const signUp = async () => {
+  const vendorSignUp = async () => {
     setLoading(true);
 
     firebase
@@ -31,7 +38,7 @@ export const Sign = () => {
         navigation.navigate("Vendor Register");
       })
       .catch((error) => {
-        setLoading(false)
+        setLoading(false);
         const errorCode = error.code;
         const errorMessage = error.message;
         // ..
@@ -40,6 +47,9 @@ export const Sign = () => {
       });
   };
 
+  const handleLogin = () => {
+    navigation.navigate("Vendor Login");
+  };
   return (
     <View style={styles.body}>
       <Text style={styles.header}>Create Account</Text>
@@ -51,7 +61,6 @@ export const Sign = () => {
             style={styles.input}
             value={email}
             placeholder="Your Email"
-            inputMode="email"
             onChangeText={setEmail}
             placeholderTextColor={"#0000004D"}
           />
@@ -82,17 +91,17 @@ export const Sign = () => {
       </View>
       <View style={styles.login}>
         <Text>Already have an account?</Text>
-        <Pressable onPress={() => navigation.navigate("Vendor Login")}>
+        <TouchableOpacity onPress={handleLogin}>
           <Text style={styles.loginText}>Log in</Text>
-        </Pressable>
+        </TouchableOpacity>
       </View>
 
       <TransparentButton
         loading={loading}
-        value={"Sign Up"}
+        value={"Sign UP"}
         signUp={
           password === confirmPassword
-            ? signUp
+            ? vendorSignUp
             : () => setErrorMessage("Your password does not match")
         }
       />

@@ -5,6 +5,7 @@ import { useNavigation } from "@react-navigation/native";
 export const TransparentButton = ({
   value,
   screenName,
+  vendorSignUp,
   signUp,
   loading,
   register,
@@ -21,7 +22,7 @@ export const TransparentButton = ({
     {
       value === "Sign Up"
         ? signUp()
-        : value === "Register"
+        : value === "Sign UP"? vendorSignUp(): value === "Register"
         ? register()
         : navigation.navigate(screenName);
     }

@@ -4,7 +4,7 @@ import {
   Text,
   TextInput,
   StyleSheet,
-  Pressable,
+  TouchableOpacity
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { OrangeButton } from "../../../../components/button/OrangeButton";
@@ -21,7 +21,7 @@ export const Log = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleLogin = async () => {
+  const vendorLogin = async () => {
     setLoading(true);
     firebase
       .auth()
@@ -40,7 +40,9 @@ export const Log = () => {
       });
     // });
   };
-
+const handleSignUp = () =>{
+ navigation.navigate("Vendor SignUp")
+}
   return (
     <View style={styles.body}>
       <View>
@@ -71,17 +73,17 @@ export const Log = () => {
 
         <View style={styles.login}>
           <Text>Already have an account?</Text>
-          <Pressable onPress={() => navigation.navigate("Vendor SignUp")}>
+          <TouchableOpacity onPress={handleSignUp}>
             <Text style={styles.loginText}>Sign Up</Text>
-          </Pressable>
+          </TouchableOpacity>
         </View>
       </View>
 
       <View style={{ position: "absolute", bottom: 30, width: "110%", paddingHorizontal:20 }}>
         <OrangeButton
-          value={"Log In"}
+          value={"Log in"}
           loading={loading}
-          handleLogin={handleLogin}
+          vendorLogin={vendorLogin}
         />
       </View>
     </View>

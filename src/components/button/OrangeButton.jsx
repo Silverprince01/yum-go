@@ -2,12 +2,12 @@ import { useState } from "react";
 import { Pressable, Text, ActivityIndicator, StyleSheet } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
-
 export const OrangeButton = ({
   value,
   screenName,
   loading,
   handleLogin,
+  vendorLogin,
   sendItem,
   proceedToCheckout,
   sendOrder,
@@ -27,6 +27,8 @@ export const OrangeButton = ({
         ? proceedToCheckout()
         : value === "Log In"
         ? handleLogin()
+        : value === "Log in"
+        ? vendorLogin()
         : value === "Add to Menu"
         ? sendItem()
         : value === "Confirm Order"
