@@ -7,7 +7,8 @@ import {
   Text,
   Pressable,
 } from "react-native";
-
+import img from "../../../assets/add.png";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/native";
 import "firebase/auth";
 import firebase from "firebase/compat/app";
@@ -25,7 +26,7 @@ export const VendorRestaurant = () => {
   const navigation = useNavigation();
   const { vendorIdentity, vendor } = useContext(AuthContext);
   const [vendorId] = vendorIdentity;
-  
+
   const vendorCollection = database.collection("vendors");
   const [loading, setLoading] = useState(false);
   const [vendors, setVendors] = vendor;
@@ -35,7 +36,7 @@ export const VendorRestaurant = () => {
   const [smallOrder, setSmallOrder] = useState(false);
 
   const addItem = (orderItem) => {
-    const existingObjectIndex = orderItems.findIndex(
+    const existingObjectIndex = orderItems?.findIndex(
       (item) => item.foodName === orderItem.foodName
     );
 
@@ -53,13 +54,14 @@ export const VendorRestaurant = () => {
 
       // Update the state by adding the new object to the array
       setOrderItems((prevArray) => [...prevArray, orderItem]);
+      // AsyncStorage.setItem("orderItems", JSON.stringify(orderItems));
     }
   };
+  console.log(orderItems);
 
   const proceedToCheckout = async () => {
     setLoading(true);
-
-    const total = orderItems.reduce((accumulator, obj) => {
+    const total = orderItems?.reduce((accumulator, obj) => {
       const operate = Number(obj.price) * Number(obj.count);
       return accumulator + operate;
     }, 0);
@@ -111,9 +113,13 @@ export const VendorRestaurant = () => {
   useEffect(() => {
     vendorData();
   }, []);
+
   return (
     <View style={styles.body}>
-      <ImageBackground source={{uri:vendors?.image}} style={styles.imgbackground}>
+      <ImageBackground
+        source={{ uri: vendors?.image }}
+        style={styles.imgbackground}
+      >
         <Pressable onPress={() => navigation.goBack()}>
           <Image source={Back} style={styles.arowBack} />
         </Pressable>
@@ -139,47 +145,14 @@ export const VendorRestaurant = () => {
       </ImageBackground>
 
       {/* Pack Size */}
-      <View style={styles.packBody}>
-        {orderItems.map((order, id) => {
-          <ImageBackground
-            key={id}
-            source={order.image}
-            style={{ width: 30, height: 20 }}
-          >
-            <Text>X{order.count}</Text>
-          </ImageBackground>;
-        })}
-        {/* <Text style={styles.packText}>Pack Size</Text>
-        <View style={styles.pack}>
-          <View style={styles.packBackground}>
-            <Image source={Add} style={styles.add} />
-            <Text style={{ fontSize: 12, fontWeight: 400, color: "white" }}>
-              Foil Pack
-            </Text>
-          </View>
-          <View style={styles.packBackground}>
-            <Image source={Add} style={styles.add} />
-            <Text style={{ fontSize: 12, fontWeight: 400, color: "white" }}>
-              Small Pack
-            </Text>
-          </View>
-          <View style={styles.packBackground}>
-            <Image source={Add} style={styles.add} />
-            <Text style={{ fontSize: 12, fontWeight: 400, color: "white" }}>
-              Big Pack
-            </Text>
-          </View>
-        </View> */}
-      </View>
 
       {/* Avalaible Foods */}
-      <View>
-        <Text style={{ color: "red", fontSize: 18 }}>
-          {smallOrder
-            ? "You are ordering below the minimum order, Kindly add more item(s)"
-            : null}
-        </Text>
-      </View>
+
+      <Text style={{ color: "red", fontSize: 18 }}>
+        {smallOrder
+          ? "You are ordering below the minimum order, Kindly add more item(s)"
+          : null}
+      </Text>
       {menu?.map((menuItem, id) => {
         return (
           <View key={id} style={styles.foodBackground}>
@@ -188,17 +161,20 @@ export const VendorRestaurant = () => {
                 <View>
                   <Text style={styles.foodText}>{menuItem.foodName}</Text>
                   <Text style={styles.foodDesc}>
-                    {menuItem.per} of {menuItem.foodName}
+                    {menuItem.per === "per portion"
+                      ? "A portion of"
+                      : "A unit of"}{" "}
+                    of {menuItem.foodName}
                   </Text>
                   <Text style={styles.foodDesc}>#{menuItem.price}.00</Text>
                 </View>
-                <View style={styles.foodImg}>
+                <Pressable onPress={() => addItem(menuItem)} style={styles.foodImg}>
                   <Image
-                    source={{uri:menuItem.image}}
+                    source={{ uri: menuItem.image }}
                     style={{ width: 59, height: 36 }}
                   />
                   <View style={styles.foodAdd}>
-                    <Pressable onPress={() => addItem(menuItem, id)}>
+                    <View>
                       <Text
                         style={{
                           fontSize: 10,
@@ -208,18 +184,30 @@ export const VendorRestaurant = () => {
                       >
                         Add
                       </Text>
-                    </Pressable>
+                    </View>
                     <Image
                       source={Add}
                       style={{ width: 10, height: 10, marginLeft: 5 }}
                     />
                   </View>
-                </View>
+                </Pressable>
               </View>
             </View>
           </View>
         );
       })}
+      {/* <View style={{ width: 100, height: 100, backgroundColor: "red" }}> */}
+      {orderItems?.map((order, id) => {
+        <View style={{ width: 40, height: 40, backgroundColor: "red" }}>
+          <Image
+            key={id}
+            source={{ uri: order.imag }}
+            style={{ width: 30, height: 20 }}
+          />
+          <Text style={{ color: "blue" }}>X{order.count}</Text>
+        </View>;
+      })}
+      {/* </View> */}
 
       {/* end */}
 

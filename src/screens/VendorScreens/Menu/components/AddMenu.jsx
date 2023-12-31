@@ -46,6 +46,15 @@ export const AddMenu = ({ uid }) => {
       .then(() => {
         setLoading(false);
         console.log(`Document written with ID: ${userId} `);
+        setMenuDesc({
+          foodName: "",
+          category: "",
+          description: "",
+          per: "per portion",
+          price: "",
+          image: null,
+          available: true,
+        })
       })
       .catch((error) => {
         setLoading(false);
