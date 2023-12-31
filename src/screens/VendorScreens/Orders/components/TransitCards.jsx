@@ -1,4 +1,4 @@
-import { Pressable, StyleSheet, Text, View, Image } from "react-native";
+import { StyleSheet, Text, View, Image } from "react-native";
 import Call from "../../../../../assets/call.png";
 export const TransitsCards = () => {
   const transitOrders = [

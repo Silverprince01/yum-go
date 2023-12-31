@@ -44,7 +44,7 @@ const AwaitingPickupsCard = ({ order, key }) => {
   return (
     <View>
       {accepted && (
-        <View key={key}>
+        <View >
           {confirm === true && (
             <View style={styles.cardWrapper}>
               <View style={styles.cardTop}>
@@ -63,7 +63,7 @@ const AwaitingPickupsCard = ({ order, key }) => {
                             <View key={ide}>
                               {or.to === vendorId.uid && (
                                 <View
-                                  key={ide}
+               
                                   style={{ flexDirection: "row", gap: 20 }}
                                 >
                                   <Text style={{ fontWeight: "500" }}>
@@ -116,7 +116,6 @@ const AwaitingPickupsCard = ({ order, key }) => {
 
 const styles = StyleSheet.create({
 	cardsWrapper: {
-		// flex: 1,
 	
 		flexDirection: "column",
 		gap: 6,
@@ -140,7 +139,6 @@ const styles = StyleSheet.create({
 		fontSize: 10,
 		fontStyle: "normal",
 		fontWeight: 400,
-		lineHeight: "normal",
 	  },
 	  cardMiddle: {
 		// flexDirection: "row",
@@ -153,7 +151,6 @@ const styles = StyleSheet.create({
 		fontSize: 12,
 		fontStyle: "normal",
 		fontWeight: 500,
-		lineHeight: "normal",
 	  },
 	  cardBottom: {
 		flexDirection: "row",

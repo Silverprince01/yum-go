@@ -4,7 +4,7 @@ import {
   Text,
   TextInput,
   StyleSheet,
-  TouchableOpacity
+  Pressable,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { OrangeButton } from "../../../../components/button/OrangeButton";
@@ -13,19 +13,19 @@ import firebase from "firebase/compat/app";
 
 import "firebase/auth";
 
-
 export const Log = () => {
   const navigation = useNavigation();
 
   const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [errormessage, setErrorMessage] = useState("");
 
   const vendorLogin = async () => {
     setLoading(true);
     firebase
       .auth()
-      .signInWithEmailAndPassword(email, password)
+      .signInWithEmailAndPassword(email.trim(), password.trim())
       .then((userCredential) => {
         // Signed up
         const user = userCredential.user;
@@ -36,13 +36,14 @@ export const Log = () => {
       })
       .catch((error) => {
         console.log(error);
+        setErrorMessage(error.message);
         setLoading(false);
       });
     // });
   };
-const handleSignUp = () =>{
- navigation.navigate("Vendor SignUp")
-}
+  const handleSignUp = () => {
+    navigation.navigate("Vendor SignUp");
+  };
   return (
     <View style={styles.body}>
       <View>
@@ -70,16 +71,23 @@ const handleSignUp = () =>{
             onChangeText={setPassword}
           />
         </View>
-
+        <Text style={{ color: "red" }}>{errormessage}</Text>
         <View style={styles.login}>
           <Text>Already have an account?</Text>
-          <TouchableOpacity onPress={handleSignUp}>
+          <Pressable onPress={handleSignUp}>
             <Text style={styles.loginText}>Sign Up</Text>
-          </TouchableOpacity>
+          </Pressable>
         </View>
       </View>
 
-      <View style={{ position: "absolute", bottom: 30, width: "110%", paddingHorizontal:20 }}>
+      <View
+        style={{
+          position: "absolute",
+          bottom: 30,
+          width: "110%",
+          paddingHorizontal: 20,
+        }}
+      >
         <OrangeButton
           value={"Log in"}
           loading={loading}
@@ -139,5 +147,4 @@ const styles = StyleSheet.create({
     marginLeft: 10,
     color: "#FD6A00",
   },
-  
 });

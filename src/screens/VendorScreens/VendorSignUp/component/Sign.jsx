@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import {
+  ScrollView,
   View,
   Text,
   TextInput,
   StyleSheet,
   Pressable,
-  TouchableOpacity,
+  KeyboardAvoidingView,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
@@ -13,6 +14,7 @@ import { TransparentButton } from "../../../../components/button/TransparentButt
 import firebase from "firebase/compat/app";
 
 import "firebase/auth";
+
 
 export const Sign = () => {
   const navigation = useNavigation();
@@ -27,7 +29,7 @@ export const Sign = () => {
 
     firebase
       .auth()
-      .createUserWithEmailAndPassword(email, password)
+      .createUserWithEmailAndPassword(email.trim(), password.trim())
       .then((userCredential) => {
         // Signed up
         const user = userCredential.user;
@@ -39,88 +41,102 @@ export const Sign = () => {
       })
       .catch((error) => {
         setLoading(false);
-        const errorCode = error.code;
         const errorMessage = error.message;
-        // ..
-        console.log(errorCode);
-        console.log(errorMessage);
+
+        setErrorMessage(errorMessage);
       });
   };
 
   const handleLogin = () => {
     navigation.navigate("Vendor Login");
   };
+  const keyboardVerticalOffset = Platform.OS === "ios" ? 10 : 0;
+
   return (
     <View style={styles.body}>
-      <Text style={styles.header}>Create Account</Text>
+      <KeyboardAvoidingView
+        behavior="position"
+        style={{ backgroundColor: "white", flex: 1 }}
+        keyboardVerticalOffset={keyboardVerticalOffset}
+      >
+        <Text style={styles.header}>Create Account</Text>
 
-      <View>
         <View>
-          <Text style={styles.inputText}>Email Address</Text>
-          <TextInput
-            style={styles.input}
-            value={email}
-            placeholder="Your Email"
-            onChangeText={setEmail}
-            placeholderTextColor={"#0000004D"}
-          />
+          <View>
+            <Text style={styles.inputText}>Email Address</Text>
+            <TextInput
+              style={styles.input}
+              value={email}
+              placeholder="Your Email"
+              onChangeText={setEmail}
+              placeholderTextColor={"#0000004D"}
+            />
+          </View>
+          <View>
+            <Text style={styles.inputText}>Password</Text>
+            <TextInput
+              style={styles.input}
+              value={password}
+              onChangeText={setPassword}
+              placeholder="Password"
+              secureTextEntry={true}
+              placeholderTextColor={"#0000004D"}
+            />
+          </View>
+          <View>
+            <Text style={styles.inputText}>Confirm Password</Text>
+            <TextInput
+              style={styles.input}
+              onChangeText={setConfirmPassword}
+              value={confirmPassword}
+              placeholder="Password"
+              secureTextEntry={true}
+              placeholderTextColor={"#0000004D"}
+            />
+            <Text style={{ color: "red" }}>{errormessage}</Text>
+          </View>
         </View>
-        <View>
-          <Text style={styles.inputText}>Password</Text>
-          <TextInput
-            style={styles.input}
-            value={password}
-            onChangeText={setPassword}
-            placeholder="Password"
-            secureTextEntry={true}
-            placeholderTextColor={"#0000004D"}
-          />
+        <View style={styles.login}>
+          <Text>Already have an account?</Text>
+          <Pressable onPress={handleLogin}>
+            <Text style={styles.loginText}>Log in</Text>
+          </Pressable>
         </View>
-        <View>
-          <Text style={styles.inputText}>Confirm Password</Text>
-          <TextInput
-            style={styles.input}
-            onChangeText={setConfirmPassword}
-            value={confirmPassword}
-            placeholder="Password"
-            secureTextEntry={true}
-            placeholderTextColor={"#0000004D"}
-          />
-          <Text style={{ color: "red" }}>{errormessage}</Text>
-        </View>
-      </View>
-      <View style={styles.login}>
-        <Text>Already have an account?</Text>
-        <TouchableOpacity onPress={handleLogin}>
-          <Text style={styles.loginText}>Log in</Text>
-        </TouchableOpacity>
-      </View>
+      </KeyboardAvoidingView>
+<View
 
-      <TransparentButton
-        loading={loading}
-        value={"Sign UP"}
-        signUp={
-          password === confirmPassword
-            ? vendorSignUp
-            : () => setErrorMessage("Your password does not match")
-        }
-      />
+style={{
+  position: "absolute",
+  bottom: 30,
+  width: "110%",
+paddingHorizontal:10
+}}>
+
+        <TransparentButton
+          loading={loading}
+          value={"Sign UP"}
+          signUp={
+            password === confirmPassword
+              ? vendorSignUp
+              : () => setErrorMessage("Your password does not match")
+          }
+          />
+          </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   body: {
-    flex: 1,
     width: "100%",
-    height: "auto",
     paddingHorizontal: 18,
     position: "absolute",
-    top: 200,
+    top: 185,
     paddingVertical: 13,
     backgroundColor: "white",
-    // borderRadius: 30,
+    borderRadius: 30,
     fontSize: 16,
+    height: 500,
   },
   header: {
     color: "#FD6A00",

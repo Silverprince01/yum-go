@@ -20,7 +20,7 @@ export const InstantOrdersCards = ({ orders }) => {
   );
 };
 
-const InstantOrdersCard = ({ order, key }) => {
+const InstantOrdersCard = ({ order }) => {
   const [loading, setLoading] = useState(false);
   const [rejectLoad, setRejectLoad] = useState(false);
   console.log(order);
@@ -63,7 +63,7 @@ const InstantOrdersCard = ({ order, key }) => {
           const dataArray = doc.data().orderss;
 
           // Map over each object in the array
-          const updatedArray = dataArray?.map((obj, id) => {
+          const updatedArray = dataArray?.map((obj) => {
             // Update the boolean value to true
 
             obj.accepted = true;
@@ -81,7 +81,7 @@ const InstantOrdersCard = ({ order, key }) => {
     } catch (error) {}
   };
   return (
-    <View key={key}>
+    <View>
       
         <View>
           {confirm === true && (
@@ -99,10 +99,10 @@ const InstantOrdersCard = ({ order, key }) => {
                       <View style={{ paddingBottom: 10 }}>
                         {ord?.order.map((or, ide) => {
                           return (
-                            <View>
+                            <View key={ide}>
                               {or.to === vendorId.uid && (
                                 <View
-                                  key={ide}
+                          
                                   style={{ flexDirection: "row", gap: 20 }}
                                 >
                                   <Text style={{ fontWeight: "500" }}>
@@ -186,7 +186,7 @@ const styles = StyleSheet.create({
     fontSize: 10,
     fontStyle: "normal",
     fontWeight: 400,
-    lineHeight: "normal",
+    
   },
   cardMiddle: {
     // flexDirection: "row",
@@ -199,7 +199,7 @@ const styles = StyleSheet.create({
     fontSize: 12,
     fontStyle: "normal",
     fontWeight: 500,
-    lineHeight: "normal",
+    
   },
   cardBottom: {
     flexDirection: "row",
@@ -219,7 +219,7 @@ const styles = StyleSheet.create({
     fontSize: 12,
     fontStyle: "normal",
     fontWeight: 400,
-    lineHeight: "normal",
+    
   },
   rejectBtnCtn: {
     flex: 1,
@@ -237,6 +237,6 @@ const styles = StyleSheet.create({
     fontSize: 12,
     fontStyle: "normal",
     fontWeight: 400,
-    lineHeight: "normal",
+    
   },
 });

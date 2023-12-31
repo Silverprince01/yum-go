@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { View, Text, TextInput, StyleSheet, Pressable, TouchableOpacity } from "react-native";
+import { View, Text, TextInput, StyleSheet, Pressable } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { OrangeButton } from "../../../../components/button/OrangeButton";
 import firebase from "firebase/compat/app";
@@ -12,23 +12,25 @@ export const Log = () => {
   const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [errormessage, setErrorMessage] = useState("");
 
   const handleLogin = async () => {
     setLoading(true);
     firebase
       .auth()
-      .signInWithEmailAndPassword(email, password)
+      .signInWithEmailAndPassword(email.trim(), password.trim())
       .then(() => {
         navigation.navigate("Home");
       })
       .catch((error) => {
         setLoading(false);
         console.log(error);
+        setErrorMessage(error.message);
       });
   };
-const handleSignUp = () =>{
-   navigation.navigate("Consumer Sign Up")
-}
+  const handleSignUp = () => {
+    navigation.navigate("Consumer Sign Up");
+  };
   return (
     <View style={styles.body}>
       <View>
@@ -56,11 +58,12 @@ const handleSignUp = () =>{
             onChangeText={setPassword}
           />
         </View>
+        <Text style={{ color: "red" }}>{errormessage}</Text>
         <View style={styles.login}>
           <Text>Don't have an account?</Text>
-          <TouchableOpacity onPress={handleSignUp}>
+          <Pressable onPress={handleSignUp}>
             <Text style={styles.loginText}>Sign Up</Text>
-          </TouchableOpacity>
+          </Pressable>
         </View>
       </View>
 

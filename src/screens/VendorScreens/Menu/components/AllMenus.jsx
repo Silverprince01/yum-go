@@ -51,9 +51,9 @@ export const AllMenus = () => {
   );
 };
 
-const AllMenu = ({ menu,key }) => {
+const AllMenu = ({ menu }) => {
   return (
-    <View key={key} style={styles.cardWrapper}>
+    <View  style={styles.cardWrapper}>
       <View>
         <Text>{menu.foodName}</Text>
         <Text>

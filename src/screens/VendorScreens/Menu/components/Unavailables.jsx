@@ -62,9 +62,9 @@ export const Unavailables = () => {
   );
 };
 
-const Unavailable = ({ menu,key }) => {
+const Unavailable = ({ menu }) => {
   return (
-    <View key={key} style={styles.cardWrapper}>
+    <View  style={styles.cardWrapper}>
       <View>
         <Text>{menu.food}</Text>
         <Text>{menu.portion}</Text>

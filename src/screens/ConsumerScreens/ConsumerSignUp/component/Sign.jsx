@@ -6,7 +6,6 @@ import {
   TextInput,
   StyleSheet,
   Pressable,
-  TouchableOpacity,
   KeyboardAvoidingView,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
@@ -26,6 +25,7 @@ export const Sign = () => {
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
   const [password, setPassword] = useState("");
+  const [errormessage, setErrorMessage] = useState("");
 
   const userData = {
     namee: namee,
@@ -52,6 +52,7 @@ export const Sign = () => {
         });
     } catch (error) {
       console.log(error);
+      setErrorMessage(error.message);
     }
   };
 
@@ -59,7 +60,7 @@ export const Sign = () => {
     setLoading(true);
     firebase
       .auth()
-      .createUserWithEmailAndPassword(email, password)
+      .createUserWithEmailAndPassword(email.trim(), password.trim())
       .then((userCredential) => {
         // Signed up
         const user = userCredential.user;
@@ -75,6 +76,7 @@ export const Sign = () => {
         // ..
         console.log(errorCode);
         console.log(errorMessage);
+        setErrorMessage(errorMessage);
       });
   };
   const handleLogin = () => {
@@ -82,15 +84,15 @@ export const Sign = () => {
   };
   const keyboardVerticalOffset = Platform.OS === "ios" ? 40 : 0;
   return (
-    <ScrollView style={styles.body} >
+    <ScrollView style={styles.body}>
       <KeyboardAvoidingView
-        behavior="position"
-        style={{backgroundColor:"white", flex:1}}
+        behavior="padding"
+        style={{ backgroundColor: "white", flex: 1 }}
         keyboardVerticalOffset={keyboardVerticalOffset}
       >
-      <View>
-        <Text style={styles.header}>Create Account</Text>
-      </View>
+        <View>
+          <Text style={styles.header}>Create Account</Text>
+        </View>
         <View>
           <Text style={styles.inputText}>First Name</Text>
           <TextInput
@@ -141,14 +143,19 @@ export const Sign = () => {
             onChangeText={setPassword}
           />
         </View>
-      <View style={styles.login}>
-        <Text>Already have an account?</Text>
-        <TouchableOpacity onPress={handleLogin}>
-          <Text style={styles.loginText}>Log in</Text>
-        </TouchableOpacity>
-      </View>
+        <Text style={{ color: "red" }}>{errormessage}</Text>
+        <View style={styles.login}>
+          <Text>Already have an account?</Text>
+          <Pressable onPress={handleLogin}>
+            <Text style={styles.loginText}>Log in</Text>
+          </Pressable>
+        </View>
 
-      <TransparentButton loading={loading} signUp={signUp} value={"Sign Up"} />
+        <TransparentButton
+          loading={loading}
+          signUp={signUp}
+          value={"Sign Up"}
+        />
       </KeyboardAvoidingView>
     </ScrollView>
   );
@@ -156,14 +163,14 @@ export const Sign = () => {
 
 const styles = StyleSheet.create({
   body: {
-    width: "100%",    
+    width: "100%",
     paddingHorizontal: 18,
-    paddingBottom:25,
+    paddingBottom: 25,
     backgroundColor: "white",
     fontSize: 16,
-    position:"absolute",
-    bottom:0,
-    zIndex:30
+    position: "absolute",
+    bottom: 0,
+    zIndex: 30,
   },
   header: {
     color: "#FD6A00",

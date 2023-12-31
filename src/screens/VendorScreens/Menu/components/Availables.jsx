@@ -58,9 +58,9 @@ export const Availables = () => {
   );
 };
 
-const Available = ({ menu,key }) => {
+const Available = ({ menu }) => {
   return (
-    <View key={key} style={styles.cardWrapper}>
+    <View  style={styles.cardWrapper}>
       <View>
         <Text>{menu.food}</Text>
         <Text>{menu.portion}</Text>
