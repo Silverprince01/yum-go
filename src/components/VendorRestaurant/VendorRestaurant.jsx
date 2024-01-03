@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState, useRef } from "react";
 import {
   View,
   Image,
@@ -6,9 +6,9 @@ import {
   StyleSheet,
   Text,
   Pressable,
+  Animated
 } from "react-native";
-import img from "../../../assets/add.png";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+
 import { useNavigation } from "@react-navigation/native";
 import "firebase/auth";
 import firebase from "firebase/compat/app";
@@ -34,8 +34,43 @@ export const VendorRestaurant = () => {
 
   const [orderItems, setOrderItems] = useState([]);
   const [smallOrder, setSmallOrder] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
+  const slideAnimation = useRef(new Animated.Value(0)).current;
 
+
+
+  const slideIn = () => {
+    setIsVisible(true);
+    Animated.timing(slideAnimation, {
+      toValue: 1,
+      duration: 500, // Adjust the duration as needed
+      useNativeDriver: false,
+    }).start();
+  };
+
+  const slideOut = () => {
+    Animated.timing(slideAnimation, {
+      toValue: 0,
+      duration: 500, // Adjust the duration as needed
+      useNativeDriver: false,
+    }).start(() => {
+      setIsVisible(false);
+    });
+  };
+
+  useEffect(() => {
+    if (isVisible) {
+      const timeoutId = setTimeout(() => {
+        slideOut();
+      }, 1000); 
+      return () => clearTimeout(timeoutId);
+    }
+  }, [isVisible]);
+  
   const addItem = (orderItem) => {
+    
+    
+    
     const existingObjectIndex = orderItems?.findIndex(
       (item) => item.foodName === orderItem.foodName
     );
@@ -147,12 +182,51 @@ export const VendorRestaurant = () => {
       {/* Pack Size */}
 
       {/* Avalaible Foods */}
-
+      {orderItems.map((order, id) => {
+        <View key={id} style={{ width: 40, height: 40, backgroundColor: "red" }}>
+          <Image            
+            source={{ uri: order.image }}
+            style={{ width: 30, height: 20 }}
+          />
+          <Text style={{ color: "blue" }}>X{order.count}</Text>
+        </View>;
+      })}
       <Text style={{ color: "red", fontSize: 18 }}>
         {smallOrder
           ? "You are ordering below the minimum order, Kindly add more item(s)"
           : null}
       </Text>
+       <Animated.View
+      style={{
+        position: 'absolute',
+        
+        top:50,
+        right: 0,
+        zIndex:5,
+        transform: [
+          {
+            translateY: slideAnimation.interpolate({
+              inputRange: [0, 10],
+              outputRange: [100, 0],
+            }),
+          },
+        ],
+      }}
+    > 
+      {isVisible && (
+        <View
+          style={{
+            backgroundColor: '#FF6600',
+            padding: 10,
+            borderRadius: 8,
+          }}
+        >
+          <Text>Food Item Added</Text>
+        </View>
+      )}
+    </Animated.View>
+  
+
       {menu?.map((menuItem, id) => {
         return (
           <View key={id} style={styles.foodBackground}>
@@ -168,7 +242,7 @@ export const VendorRestaurant = () => {
                   </Text>
                   <Text style={styles.foodDesc}>#{menuItem.price}.00</Text>
                 </View>
-                <Pressable onPress={() => addItem(menuItem)} style={styles.foodImg}>
+                <Pressable onPress={() =>{ addItem(menuItem); slideIn()}} style={styles.foodImg}>
                   <Image
                     source={{ uri: menuItem.image }}
                     style={{ width: 59, height: 36 }}
@@ -197,16 +271,7 @@ export const VendorRestaurant = () => {
         );
       })}
       {/* <View style={{ width: 100, height: 100, backgroundColor: "red" }}> */}
-      {orderItems?.map((order, id) => {
-        <View style={{ width: 40, height: 40, backgroundColor: "red" }}>
-          <Image
-            key={id}
-            source={{ uri: order.imag }}
-            style={{ width: 30, height: 20 }}
-          />
-          <Text style={{ color: "blue" }}>X{order.count}</Text>
-        </View>;
-      })}
+      
       {/* </View> */}
 
       {/* end */}

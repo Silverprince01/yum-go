@@ -5,18 +5,14 @@ import { TrackOrderComponent } from "../../../../components/TrackOrder/TrackOrde
 import { VendorInfo } from "../../../../components/TrackOrder/VendorInfo";
 import { OrangeButton } from "../../../../components/button/OrangeButton";
 
-
 export const Track = () => {
-  
-
   return (
     <View>
       <Text style={styles.orderText}>Order 17632</Text>
-      {/* {orderComponents.map((order) => ( */}
-        <TrackOrderComponent />
-      {/* ))} */}
+      <TrackOrderComponent />
+
       <VendorInfo />
-      <View style={{ paddingHorizontal: 15 }}>
+      <View style={{ paddingHorizontal: 10, marginBottom:80 }}>
         <OrangeButton value={"Back to Home"} screenName={"Home"} />
       </View>
     </View>
@@ -27,7 +23,6 @@ const styles = StyleSheet.create({
   orderText: {
     color: "black",
     fontSize: 20,
-    fontFamily: "Roboto",
     fontWeight: 500,
     lineHeight: 27,
     margin: 15,

@@ -48,10 +48,10 @@ export const TrackOrderComponent = () => {
       {orderComponents.map((order) => (
         <View style={styles.orderProgress} key={order.id}>
           <View style={{ flexDirection: "row", gap: 15 }}>
-            <Image
+             <Image
               source={order.status ? TickOrange : TickBlack}
               style={{ width: 15, height: 15 }}
-            />
+            /> 
             <View>
               <Text
                 style={{

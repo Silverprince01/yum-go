@@ -1,4 +1,4 @@
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, View, Image } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { OpeningScreen } from "./src/screens/OpeningScreen";
@@ -23,7 +23,7 @@ import { Profile } from "./src/screens/VendorScreens/Profile";
 import { Orders } from "./src/screens/VendorScreens/Orders";
 
 
-
+import ArrowLeft from "./assets/arrow-left.png"
 
 
 import { AuthProvider } from "./src/screens/ConsumerScreens/Authentication";

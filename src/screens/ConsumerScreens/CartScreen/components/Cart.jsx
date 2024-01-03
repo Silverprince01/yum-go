@@ -26,15 +26,17 @@ export const Cart = () => {
         </View>
       </View>
 
-      <ScrollView style={{ marginVertical: 10, paddingBottom: 65 }}>
+      <ScrollView style={{ marginVertical: 10, marginBottom: 75 }}>
         <Packs />
       </ScrollView>
-      <View  style={{
+      <View
+        style={{
           position: "absolute",
           bottom: 80,
           width: "100%",
           paddingHorizontal: 10,
-        }}>
+        }}
+      >
         <OrangeButton value={"Continue"} screenName={"Checkout"} />
       </View>
       <View style={{ position: "absolute", bottom: 0, width: "100%" }}>
