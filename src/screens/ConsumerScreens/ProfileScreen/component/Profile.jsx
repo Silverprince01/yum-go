@@ -134,8 +134,9 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     borderRadius: 10,
     paddingHorizontal: 17,
-    // paddingVertical: 5,
+    paddingVertical: 5,
     elevation: 10, // For Android; adjust the elevation value as needed
+    
     shadowColor: "black", // For iOS
     shadowOffset: { width: 0, height: 2 }, // For iOS; adjust the offset as needed
     shadowOpacity: 0.2, // For iOS; adjust the opacity as needed
@@ -160,11 +161,11 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     paddingHorizontal: 17,
     marginVertical: 10,
-    elevation: 10, // For Android; adjust the elevation value as needed
-    shadowColor: "black", // For iOS
-    shadowOffset: { width: 0, height: 2 }, // For iOS; adjust the offset as needed
-    shadowOpacity: 0.2, // For iOS; adjust the opacity as needed
-    shadowRadius: 10,
+    // elevation: 10, // For Android; adjust the elevation value as needed
+    // shadowColor: "black", // For iOS
+    // shadowOffset: { width: 0, height: 2 }, // For iOS; adjust the offset as needed
+    // shadowOpacity: 0.2, // For iOS; adjust the opacity as needed
+    // shadowRadius: 10,
   },
   iconRight: {
     flexDirection: "row",

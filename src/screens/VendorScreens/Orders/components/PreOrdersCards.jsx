@@ -53,9 +53,9 @@ export const PreOrdersCards = () => {
 	);
 };
 
-const PreOrdersCard = ({ order,key }) => {
+const PreOrdersCard = ({ order }) => {
 	return (
-		<View key={key} style={styles.cardWrapper}>
+		<View style={styles.cardWrapper}>
 			<View style={styles.cardTop}>
 				<Text style={styles.cardTopText}>
 					{order.name} - Order {order.orderId}
@@ -129,8 +129,7 @@ const styles = StyleSheet.create({
 	cardTopText: {
 		color: "#949090",
 		fontSize: 10,
-		fontStyle: "normal",
-		fontWeight: 400,
+		fontWeight: "400",
 	},
 	cardMiddle: {
 		flexDirection: "row",
@@ -139,8 +138,7 @@ const styles = StyleSheet.create({
 	cardMiddleText: {
 		color: "#151515",
 		fontSize: 12,
-		fontStyle: "normal",
-		fontWeight: 500,
+		fontWeight: "500",
 	},
 	cardMiddleLeft: {
 		justifyContent: "space-between",

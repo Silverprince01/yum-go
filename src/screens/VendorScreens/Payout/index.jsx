@@ -22,13 +22,12 @@ const styles = StyleSheet.create({
 		gap: 6,
 
 		width: "100%",
-		overflow: "hidden",
 	},
 	tabContentContainer: {
 		flex: 1,
 		gap: 6,
 
 		width: "100%",
-		overflow: "hidden",
+
 	},
 });

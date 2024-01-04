@@ -7,6 +7,7 @@ import {
   Image,
   Pressable,
   KeyboardAvoidingView,
+  Platform,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
@@ -97,9 +98,9 @@ export const Register = () => {
   return (
     <View style={styles.body}>
       <KeyboardAvoidingView
-      behavior="padding"
-      style={{ backgroundColor: "white", flex: 1 }}
-      keyboardVerticalOffset={keyboardVerticalOffset}
+        behavior="padding"
+        style={{ backgroundColor: "white", flex: 1 }}
+        keyboardVerticalOffset={keyboardVerticalOffset}
       >
         <Text style={styles.header}>Register your Canteen</Text>
 
@@ -195,7 +196,6 @@ export const Register = () => {
                 value={minOrder}
                 placeholder="Min Order"
                 onChangeText={setMinOrder}
-                keyboardType="numeric"
                 placeholderTextColor={"#0000004D"}
               />
             </View>
@@ -206,7 +206,6 @@ export const Register = () => {
                 value={deliveryFee}
                 placeholder="Delivery Fee"
                 onChangeText={setDeliveryFee}
-                keyboardType="numeric"
                 placeholderTextColor={"#0000004D"}
               />
             </View>
@@ -221,13 +220,11 @@ export const Register = () => {
           </Pressable>
         </View>
 
-
         <TransparentButton
+          value="Register"
           loading={loading}
-          value={"Register"}
-          register={register}
-          />
-
+          register={ register}
+        />
       </KeyboardAvoidingView>
     </View>
   );
@@ -243,13 +240,13 @@ const styles = StyleSheet.create({
     top: 200,
     paddingVertical: 13,
     backgroundColor: "white",
-    // borderRadius: 30,
+    borderRadius: 30,
     fontSize: 16,
   },
   header: {
     color: "#FD6A00",
     fontSize: 24,
-    fontWeight: 700,
+    fontWeight: "700",
     marginBottom: 20,
   },
   inputContainer: {

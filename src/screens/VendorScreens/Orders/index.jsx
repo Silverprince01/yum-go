@@ -80,13 +80,13 @@ const styles = StyleSheet.create({
     backgroundColor: "#E7E7E7",
     gap: 6,
     width: "100%",
-    overflow: "hidden",
+   
   },
   tabContentContainer: {
     flex: 1,
     gap: 6,
 
     width: "100%",
-    overflow: "hidden",
+   
   },
 });

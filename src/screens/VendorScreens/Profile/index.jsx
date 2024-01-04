@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
 	View,
 	StyleSheet,
@@ -28,7 +28,6 @@ const styles = StyleSheet.create({
 		backgroundColor: "#E7E7E7",
 
 		width: "100%",
-		overflow: "hidden",
 
 		position: "relative",
 	},
@@ -37,7 +36,6 @@ const styles = StyleSheet.create({
 		gap: 10,
 
 		width: "100%",
-		overflow: "scroll",
 
 		paddingTop: 19,
 		paddingBottom: 9,
@@ -67,7 +65,7 @@ const MainContent = () => {
 				style={{
 					alignItems: "center",
 					height: 175,
-					backgroundColor: "rgba(253, 131, 42, 0.81)",
+					backgroundColor: "#FFFCFB",
 					borderBottomLeftRadius: 12,
 					borderBottomRightRadius: 12,
 
@@ -87,9 +85,9 @@ const MainContent = () => {
 						style={{
 							color: "#000",
 
-							// fontFamily: "Roboto",
+							
 							fontSize: 20,
-							fontWeight: 500,
+							fontWeight: "500",
 							lineHeight: 27 /* 135% */,
 						}}
 					>
@@ -100,9 +98,9 @@ const MainContent = () => {
 						style={{
 							color: "#000",
 
-							// fontFamily: "Roboto",
+							
 							fontSize: 10,
-							fontWeight: 300,
+							fontWeight: "300",
 							lineHeight: 14 /* 140% */,
 							letterSpacing: -0.408,
 						}}
@@ -113,9 +111,9 @@ const MainContent = () => {
 					<Text
 						style={{
 							color: "#000",
-							// fontFamily: "Roboto",
+							
 							fontSize: 12,
-							fontWeight: 400,
+							fontWeight: "400",
 							lineHeight: 15,
 						}}
 					>

@@ -33,6 +33,8 @@ export const FooterNav = () => {
 				onPress={() => {
 					handlePress("Vendor Orders");
 				}}
+				style={styles.press}
+
 			>
 				<Image
 					source={
@@ -56,6 +58,8 @@ export const FooterNav = () => {
 				onPress={() => {
 					handlePress("Vendor Menu");
 				}}
+				style={styles.press}
+
 			>
 				<Image
 					source={
@@ -79,6 +83,8 @@ export const FooterNav = () => {
 				onPress={() => {
 					handlePress("Vendor Payout");
 				}}
+				style={styles.press}
+
 			>
 				<Image
 					source={
@@ -102,6 +108,7 @@ export const FooterNav = () => {
 				onPress={() => {
 					handlePress("Vendor Profile");
 				}}
+				style={styles.press}
 			>
 				<Image
 					source={
@@ -138,6 +145,10 @@ const styles = StyleSheet.create({
 		backgroundColor: "white",
 		height: 70,
 		width: "100%",
+	},
+	press:{
+justifyContent:"center",
+alignItems:"center"
 	},
 	img: {
 		width: 16,

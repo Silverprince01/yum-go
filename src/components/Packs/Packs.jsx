@@ -53,7 +53,7 @@ export const Packs = () => {
           if (doc.exists) {
             const removeArray = doc.data().orderss;
             const indexToRemove = removeArray.indexOf(orde);
-            if (indexToRemove) {
+            if (indexToRemove !== -1) {
               // Remove the value from the array
               removeArray.splice(indexToRemove, 1);
 
@@ -91,8 +91,13 @@ export const Packs = () => {
         Your Order
       </Text>
       <View style={{ flex: 1, paddingBottom: 40 }}>
-        {orders == [] ? (
-          <Text> No current order</Text>
+        {loading ? (
+          <View style={{ justifyContent: "center", alignItems: "center" }}>
+            <Text style={{ fontSize: 20, fontWeight: "600" }}>
+              
+              No current order
+            </Text>
+          </View>
         ) : (
           orders?.map((orde, id) => {
             return (

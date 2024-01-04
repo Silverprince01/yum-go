@@ -6,7 +6,8 @@ import {
   TextInput,
   StyleSheet,
   Pressable,
-  KeyboardAvoidingView,
+  // KeyboardAvoidingView,
+  // Platform
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
@@ -71,6 +72,7 @@ export const Sign = () => {
         navigation.navigate("Log In");
       })
       .catch((error) => {
+        setLoading(false);
         const errorCode = error.code;
         const errorMessage = error.message;
         // ..
@@ -82,81 +84,81 @@ export const Sign = () => {
   const handleLogin = () => {
     navigation.navigate("Log In");
   };
-  const keyboardVerticalOffset = Platform.OS === "ios" ? 40 : 0;
+
   return (
     <ScrollView style={styles.body}>
-      <KeyboardAvoidingView
+      {/* <KeyboardAvoidingView
         behavior="padding"
         style={{ backgroundColor: "white", flex: 1 }}
-        keyboardVerticalOffset={keyboardVerticalOffset}
-      >
-        <View>
-          <Text style={styles.header}>Create Account</Text>
-        </View>
-        <View>
-          <Text style={styles.inputText}>First Name</Text>
-          <TextInput
-            style={styles.input}
-            placeholder="Full Name"
-            placeholderTextColor={"#0000004D"}
-            value={namee}
-            onChangeText={setName}
-          />
-        </View>
-        <View>
-          <Text style={styles.inputText}>Phone Number</Text>
-          <TextInput
-            style={styles.input}
-            placeholder="Phone Number"
-            placeholderTextColor={"#0000004D"}
-            value={phone}
-            onChangeText={setPhone}
-          />
-        </View>
-        <View>
-          <Text style={styles.inputText}>Email Address</Text>
-          <TextInput
-            style={styles.input}
-            placeholder="Your Email"
-            placeholderTextColor={"#0000004D"}
-            value={email}
-            onChangeText={setEmail}
-          />
-        </View>
-        <View>
-          <Text style={styles.inputText}>Address</Text>
-          <TextInput
-            style={styles.input}
-            placeholder="Input Address"
-            placeholderTextColor={"#0000004D"}
-            value={address}
-            onChangeText={setAddress}
-          />
-        </View>
-        <View>
-          <Text style={styles.inputText}>Password</Text>
-          <TextInput
-            style={styles.input}
-            placeholder="Input Password"
-            placeholderTextColor={"#0000004D"}
-            value={password}
-            onChangeText={setPassword}
-          />
-        </View>
-        <Text style={{ color: "red" }}>{errormessage}</Text>
-        <View style={styles.login}>
-          <Text>Already have an account?</Text>
-          <Pressable onPress={handleLogin}>
-            <Text style={styles.loginText}>Log in</Text>
-          </Pressable>
-        </View>
+        keyboardVerticalOffset={Platform.OS === "ios" ? 40 : 0}
+      > */}
 
-        <TransparentButton
-          loading={loading}
-          signUp={signUp}
-          value={"Sign Up"}
+      <Text style={styles.header}>Create Account</Text>
+
+      <View>
+        <Text style={styles.inputText}>First Name</Text>
+        <TextInput
+          style={styles.input}
+          placeholder="Full Name"
+          placeholderTextColor={"#0000004D"}
+          value={namee}
+          onChangeText={setName}
         />
-      </KeyboardAvoidingView>
+      </View>
+      <View>
+        <Text style={styles.inputText}>Phone Number</Text>
+        <TextInput
+          style={styles.input}
+          placeholder="Phone Number"
+          placeholderTextColor={"#0000004D"}
+          value={phone}
+          onChangeText={setPhone}
+        />
+      </View>
+      <View>
+        <Text style={styles.inputText}>Email Address</Text>
+        <TextInput
+          style={styles.input}
+          placeholder="Your Email"
+          placeholderTextColor={"#0000004D"}
+          value={email}
+          onChangeText={setEmail}
+        />
+      </View>
+      <View>
+        <Text style={styles.inputText}>Address</Text>
+        <TextInput
+          style={styles.input}
+          placeholder="Input Address"
+          placeholderTextColor={"#0000004D"}
+          value={address}
+          onChangeText={setAddress}
+        />
+      </View>
+      <View>
+        <Text style={styles.inputText}>Password</Text>
+        <TextInput
+          style={styles.input}
+          placeholder="Input Password"
+          placeholderTextColor={"#0000004D"}
+          value={password}
+          onChangeText={setPassword}
+        />
+      </View>
+      <Text style={{ color: "red" }}>{errormessage}</Text>
+      <View style={styles.login}>
+        <Text>Already have an account?</Text>
+        <Pressable onPress={handleLogin}>
+          <Text style={styles.loginText}>Log in</Text>
+        </Pressable>
+      </View>
+
+      <TransparentButton
+        loading={loading}
+        signUp={signUp}
+        value="Sign Up"
+      />
+      {/* </KeyboardAvoidingView> */}
     </ScrollView>
   );
 };
@@ -175,7 +177,7 @@ const styles = StyleSheet.create({
   header: {
     color: "#FD6A00",
     fontSize: 24,
-    fontWeight: 700,
+    fontWeight: "700",
     marginBottom: 20,
   },
   inputContainer: {

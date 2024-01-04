@@ -1,9 +1,9 @@
 import { View, Text, Image, StyleSheet } from "react-native";
 import { OrangeButton } from "../../../components/button/OrangeButton";
 import image from "../../../../assets/yumDark.png";
-import { useNavigation } from "@react-navigation/native";
+
 export const Main3 = () => {
-  const navigation = useNavigation();
+  
   return (
     <View style={styles.body}>
       <View style={styles.imageContainer}>
@@ -14,14 +14,12 @@ export const Main3 = () => {
         <Text style={styles.text}> Who are you? </Text>
         <View style={styles.buttonCont}>
           <OrangeButton
-            navigation={navigation}
             value={"Consumer"}
             screenName={"Log In"}
           />
         </View>
         <View>
           <OrangeButton
-            navigation={navigation}
             value={"Vendor"}
             screenName={"Vendor Login"}
           />

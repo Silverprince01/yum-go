@@ -17,9 +17,9 @@ const headerContainerStyles = StyleSheet.create({
 		borderEndEndRadius: 12,
 		backgroundColor: "#FFFCFB",
 		
-		shadowOffset: 8,
-		shadowOpacity: 0,
-		shadowColor: "rgba(0, 0, 0, 0.25)",
+		// shadowOffset: 8,
+		// shadowOpacity: 0,
+		// shadowColor: "rgba(0, 0, 0, 0.25)",
 
 		width: "100%",
 		overflow: "hidden",

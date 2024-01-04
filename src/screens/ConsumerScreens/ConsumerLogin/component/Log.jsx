@@ -20,6 +20,7 @@ export const Log = () => {
       .auth()
       .signInWithEmailAndPassword(email.trim(), password.trim())
       .then(() => {
+        setLoading(false)
         navigation.navigate("Home");
       })
       .catch((error) => {
@@ -61,7 +62,7 @@ export const Log = () => {
         <Text style={{ color: "red" }}>{errormessage}</Text>
         <View style={styles.login}>
           <Text>Don't have an account?</Text>
-          <Pressable onPress={handleSignUp}>
+          <Pressable style={styles.loginText} onPress={handleSignUp}>
             <Text style={styles.loginText}>Sign Up</Text>
           </Pressable>
         </View>
@@ -78,7 +79,7 @@ export const Log = () => {
         <OrangeButton
           value="Log In"
           loading={loading}
-          handleLogin={handleLogin}
+          handleLogin={ handleLogin}
         />
       </View>
     </View>

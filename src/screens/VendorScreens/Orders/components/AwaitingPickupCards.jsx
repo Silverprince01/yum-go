@@ -43,7 +43,7 @@ const AwaitingPickupsCard = ({ order, key }) => {
   }, []);
   return (
     <View>
-      {accepted && (
+      {/* {accepted && ( */}
         <View >
           {confirm === true && (
             <View style={styles.cardWrapper}>
@@ -54,11 +54,11 @@ const AwaitingPickupsCard = ({ order, key }) => {
               </View>
 
               <View style={styles.cardMiddle}>
-                {order?.order.orderss.map((ord, id) => {
+                {order.order.orderss.map((ord, id) => {
                   return (
                     <View key={id}>
                       <View style={{ paddingBottom: 10 }}>
-                        {ord?.order.map((or, ide) => {
+                        {ord.order.map((or, ide) => {
                           return (
                             <View key={ide}>
                               {or.to === vendorId.uid && (
@@ -103,20 +103,19 @@ const AwaitingPickupsCard = ({ order, key }) => {
 
               <View style={styles.cardBottom}>
                 <View style={{ width: "100%" }}>
-                  <OrangeButton value={"Confirm Delivery"} />
+                  <OrangeButton value="Confirm Delivery" />
                 </View>
               </View>
             </View>
           )}
         </View>
-      )}
+      {/* )} */}
     </View>
   );
 };
 
 const styles = StyleSheet.create({
 	cardsWrapper: {
-	
 		flexDirection: "column",
 		gap: 6,
 	  },
@@ -135,22 +134,20 @@ const styles = StyleSheet.create({
 	  },
 	  cardTopText: {
 		color: "#949090",
-		// fontFamily: "Roboto",
 		fontSize: 10,
-		fontStyle: "normal",
-		fontWeight: 400,
+		fontWeight: "400",
+  
+    
 	  },
 	  cardMiddle: {
-		// flexDirection: "row",
 		justifyContent: "space-between",
 		position: "relative",
 	  },
 	  cardMiddleText: {
 		color: "#151515",
-		// fontFamily: "Roboto",
+
 		fontSize: 12,
-		fontStyle: "normal",
-		fontWeight: 500,
+		fontWeight: "500",
 	  },
 	  cardBottom: {
 		flexDirection: "row",

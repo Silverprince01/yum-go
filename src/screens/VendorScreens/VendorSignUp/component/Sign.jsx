@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import {
-  ScrollView,
   View,
   Text,
   TextInput,
   StyleSheet,
   Pressable,
   KeyboardAvoidingView,
+  Platform,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
@@ -14,7 +14,6 @@ import { TransparentButton } from "../../../../components/button/TransparentButt
 import firebase from "firebase/compat/app";
 
 import "firebase/auth";
-
 
 export const Sign = () => {
   const navigation = useNavigation();
@@ -103,25 +102,24 @@ export const Sign = () => {
           </Pressable>
         </View>
       </KeyboardAvoidingView>
-<View
-
-style={{
-  position: "absolute",
-  bottom: 30,
-  width: "110%",
-paddingHorizontal:10
-}}>
-
+      <View
+        style={{
+          position: "absolute",
+          bottom: 30,
+          width: "110%",
+          paddingHorizontal: 10,
+        }}
+      >
         <TransparentButton
+          value="Sign UP"
           loading={loading}
-          value={"Sign UP"}
           signUp={
             password === confirmPassword
               ? vendorSignUp
               : () => setErrorMessage("Your password does not match")
           }
-          />
-          </View>
+        />
+      </View>
     </View>
   );
 };
@@ -136,12 +134,12 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     borderRadius: 30,
     fontSize: 16,
-    height: 500,
+    // height: 500,
   },
   header: {
     color: "#FD6A00",
     fontSize: 24,
-    fontWeight: 700,
+    fontWeight: "700",
     marginBottom: 20,
   },
   inputContainer: {

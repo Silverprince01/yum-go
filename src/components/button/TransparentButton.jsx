@@ -22,7 +22,9 @@ export const TransparentButton = ({
     {
       value === "Sign Up"
         ? signUp()
-        : value === "Sign UP"? vendorSignUp(): value === "Register"
+        : value === "Sign UP"
+        ? vendorSignUp()
+        : value === "Register"
         ? register()
         : navigation.navigate(screenName);
     }
@@ -49,7 +51,7 @@ const styles = StyleSheet.create({
     borderRadius: 16,
     width: "100%",
     borderColor: "#FF6600",
-    borderWidth: "1px",
+    borderWidth: 1,
     justifyContent: "center",
     flexDirection: "row",
     gap: 10,

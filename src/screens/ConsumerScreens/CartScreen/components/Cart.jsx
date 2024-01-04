@@ -1,31 +1,18 @@
 import {
   StyleSheet,
-  Text,
   ScrollView,
   View,
-  Image,
-  Pressable,
+  
 } from "react-native";
-import React from "react";
-import { useNavigation } from "@react-navigation/native";
-import Back from "../../../../../assets/arrow-left.png";
+
 import { Packs } from "../../../../components/Packs/Packs";
 import { NavBar } from "../../../../components/NavBar/NavBar";
 import { OrangeButton } from "../../../../components/button/OrangeButton";
 
 export const Cart = () => {
-  const navigation = useNavigation();
   return (
     <View style={styles.body}>
-      <View style={styles.head}>
-        <View style={styles.checkout}>
-          <Pressable onPress={() => navigation.goBack()}>
-            <Image source={Back} style={styles.img} />
-          </Pressable>
-          <Text>Add to Cart</Text>
-        </View>
-      </View>
-
+      
       <ScrollView style={{ marginVertical: 10, marginBottom: 75 }}>
         <Packs />
       </ScrollView>

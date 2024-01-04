@@ -6,7 +6,7 @@ import {
   StyleSheet,
   Text,
   Pressable,
-  Animated
+  Animated,
 } from "react-native";
 
 import { useNavigation } from "@react-navigation/native";
@@ -37,8 +37,6 @@ export const VendorRestaurant = () => {
   const [isVisible, setIsVisible] = useState(false);
   const slideAnimation = useRef(new Animated.Value(0)).current;
 
-
-
   const slideIn = () => {
     setIsVisible(true);
     Animated.timing(slideAnimation, {
@@ -62,15 +60,14 @@ export const VendorRestaurant = () => {
     if (isVisible) {
       const timeoutId = setTimeout(() => {
         slideOut();
-      }, 1000); 
+      }, 1000);
       return () => clearTimeout(timeoutId);
     }
   }, [isVisible]);
+
   
+
   const addItem = (orderItem) => {
-    
-    
-    
     const existingObjectIndex = orderItems?.findIndex(
       (item) => item.foodName === orderItem.foodName
     );
@@ -80,6 +77,7 @@ export const VendorRestaurant = () => {
       const updatedArray = [...orderItems];
       updatedArray[existingObjectIndex].count =
         (updatedArray[existingObjectIndex].count || 0) + 1;
+        
       setOrderItems(updatedArray);
     } else {
       // If the object does not exist, create the count property
@@ -91,8 +89,9 @@ export const VendorRestaurant = () => {
       setOrderItems((prevArray) => [...prevArray, orderItem]);
       // AsyncStorage.setItem("orderItems", JSON.stringify(orderItems));
     }
+    
   };
-  console.log(orderItems);
+  
 
   const proceedToCheckout = async () => {
     setLoading(true);
@@ -129,6 +128,7 @@ export const VendorRestaurant = () => {
         setLoading(false);
       }
     } else {
+      setLoading(false);
       setSmallOrder(true);
     }
     console.log(smallOrder);
@@ -182,9 +182,12 @@ export const VendorRestaurant = () => {
       {/* Pack Size */}
 
       {/* Avalaible Foods */}
-      {orderItems.map((order, id) => {
-        <View key={id} style={{ width: 40, height: 40, backgroundColor: "red" }}>
-          <Image            
+      {orderItems?.map((order, id) => {
+        <View
+          key={id}
+          style={{ width: 40, height: 40, backgroundColor: "red" }}
+        >
+          <Image
             source={{ uri: order.image }}
             style={{ width: 30, height: 20 }}
           />
@@ -196,36 +199,35 @@ export const VendorRestaurant = () => {
           ? "You are ordering below the minimum order, Kindly add more item(s)"
           : null}
       </Text>
-       <Animated.View
-      style={{
-        position: 'absolute',
-        
-        top:50,
-        right: 0,
-        zIndex:5,
-        transform: [
-          {
-            translateY: slideAnimation.interpolate({
-              inputRange: [0, 10],
-              outputRange: [100, 0],
-            }),
-          },
-        ],
-      }}
-    > 
-      {isVisible && (
-        <View
-          style={{
-            backgroundColor: '#FF6600',
-            padding: 10,
-            borderRadius: 8,
-          }}
-        >
-          <Text>Food Item Added</Text>
-        </View>
-      )}
-    </Animated.View>
-  
+      <Animated.View
+        style={{
+          position: "absolute",
+
+          top: 50,
+          right: 0,
+          zIndex: 5,
+          transform: [
+            {
+              translateY: slideAnimation.interpolate({
+                inputRange: [0, 10],
+                outputRange: [100, 0],
+              }),
+            },
+          ],
+        }}
+      >
+        {isVisible && (
+          <View
+            style={{
+              backgroundColor: "#FF6600",
+              padding: 10,
+              borderRadius: 8,
+            }}
+          >
+            <Text>Food Item Added</Text>
+          </View>
+        )}
+      </Animated.View>
 
       {menu?.map((menuItem, id) => {
         return (
@@ -242,7 +244,13 @@ export const VendorRestaurant = () => {
                   </Text>
                   <Text style={styles.foodDesc}>#{menuItem.price}.00</Text>
                 </View>
-                <Pressable onPress={() =>{ addItem(menuItem); slideIn()}} style={styles.foodImg}>
+                <Pressable
+                  onPress={() => {
+                    addItem(menuItem);
+                    slideIn();
+                  }}
+                  style={styles.foodImg}
+                >
                   <Image
                     source={{ uri: menuItem.image }}
                     style={{ width: 59, height: 36 }}
@@ -271,7 +279,7 @@ export const VendorRestaurant = () => {
         );
       })}
       {/* <View style={{ width: 100, height: 100, backgroundColor: "red" }}> */}
-      
+
       {/* </View> */}
 
       {/* end */}

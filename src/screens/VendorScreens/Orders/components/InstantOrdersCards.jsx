@@ -182,23 +182,18 @@ const styles = StyleSheet.create({
   },
   cardTopText: {
     color: "#949090",
-    // fontFamily: "Roboto",
     fontSize: 10,
-    fontStyle: "normal",
-    fontWeight: 400,
+    fontWeight: "400",
     
   },
   cardMiddle: {
-    // flexDirection: "row",
     justifyContent: "space-between",
     position: "relative",
   },
   cardMiddleText: {
     color: "#151515",
-    // fontFamily: "Roboto",
     fontSize: 12,
-    fontStyle: "normal",
-    fontWeight: 500,
+    fontWeight: "500",
     
   },
   cardBottom: {
@@ -213,12 +208,10 @@ const styles = StyleSheet.create({
     paddingVertical: 12,
   },
   acceptBtn: {
-    color: "#FFF",
+    color: "white",
     textAlign: "center",
-    // fontFamily: "Roboto",
     fontSize: 12,
-    fontStyle: "normal",
-    fontWeight: 400,
+    fontWeight: "400",
     
   },
   rejectBtnCtn: {
@@ -226,17 +219,14 @@ const styles = StyleSheet.create({
 
     borderRadius: 6,
     borderWidth: 1,
-    borderStyle: "solid",
     borderColor: "#C4C4C4",
     paddingVertical: 12,
   },
   rejectBtn: {
     color: "#C4C4C4",
     textAlign: "center",
-    // fontFamily: "Roboto",
     fontSize: 12,
-    fontStyle: "normal",
-    fontWeight: 400,
+    fontWeight: "400",
     
   },
 });

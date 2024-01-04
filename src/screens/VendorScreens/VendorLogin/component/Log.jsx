@@ -1,11 +1,5 @@
 import React, { useState } from "react";
-import {
-  View,
-  Text,
-  TextInput,
-  StyleSheet,
-  Pressable,
-} from "react-native";
+import { View, Text, TextInput, StyleSheet, Pressable } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { OrangeButton } from "../../../../components/button/OrangeButton";
 
@@ -91,7 +85,7 @@ export const Log = () => {
         <OrangeButton
           value={"Log in"}
           loading={loading}
-          vendorLogin={vendorLogin}
+          vendorLogin={ vendorLogin}
         />
       </View>
     </View>
@@ -114,8 +108,8 @@ const styles = StyleSheet.create({
   header: {
     color: "#FD6A00",
     fontSize: 24,
-    fontWeight: 700,
-    lineHeight: 28.14,
+    fontWeight: "700",
+    lineHeight: 28,
     paddingVertical: 20,
   },
   inputContainer: {

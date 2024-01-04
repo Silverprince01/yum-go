@@ -13,7 +13,7 @@ import { AuthContext } from "../../screens/ConsumerScreens/Authentication";
 import ArrowRight from "../../../assets/arrow-right.png";
 export const OrderInfo = () => {
   const [option, setOption] = useState(0);
-  
+
   const userId = firebase.auth().currentUser;
   const { consumer } = useContext(AuthContext);
   const [consumers, setConsumers] = consumer;
@@ -69,7 +69,7 @@ export const OrderInfo = () => {
                   style={{
                     width: 10,
                     height: 10,
-                    borderRadius: "50%",
+                    borderRadius: 50,
                     borderColor: "#FD832A",
                     borderWidth: 1,
                     justifyContent: "center",
@@ -82,7 +82,7 @@ export const OrderInfo = () => {
                         ? {
                             width: 6,
                             height: 6,
-                            borderRadius: "50%",
+                            borderRadius: 50,
                             backgroundColor: "#FD832A",
                           }
                         : {}
@@ -103,7 +103,7 @@ export const OrderInfo = () => {
                   style={{
                     width: 10,
                     height: 10,
-                    borderRadius: "50%",
+                    borderRadius: 50,
                     borderColor: "#FD832A",
                     borderWidth: 1,
                     justifyContent: "center",
@@ -116,7 +116,7 @@ export const OrderInfo = () => {
                         ? {
                             width: 6,
                             height: 6,
-                            borderRadius: "50%",
+                            borderRadius: 50,
                             backgroundColor: "#FD832A",
                           }
                         : {}
@@ -156,11 +156,11 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     borderRadius: 12,
     marginVertical: 15,
-    elevation: 20,
-    shadowColor: "black",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.4,
-    shadowRadius: 10,
+    // elevation: 20,
+    // shadowColor: "black",
+    // shadowOffset: { width: 0, height: 2 },
+    // shadowOpacity: 0.4,
+    // shadowRadius: 10,
   },
   input: {
     padding: 10,

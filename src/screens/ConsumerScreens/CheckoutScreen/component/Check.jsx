@@ -69,14 +69,14 @@ export const Check = () => {
       setLoading(true);
       const orderCollection = database.doc(`orders/${userId.uid}`);
       // console.log(orderCollection);
-      
+
       orderCollection.get().then((doc) => {
         if (doc.exists) {
           // Get the array as an array of objects
           const dataArray = doc.data().orderss;
 
           // Map over each object in the array
-          const updatedArray = dataArray?.map((obj, id) => {
+          const updatedArray = dataArray.map((obj, id) => {
             // Update the boolean value to true
             obj.confirmation = true;
             // Add a new value
@@ -102,14 +102,14 @@ export const Check = () => {
   return (
     <ScrollView>
       <View style={styles.body}>
-        <View style={styles.head}>
+        {/* <View style={styles.head}>
           <View style={styles.checkout}>
             <Pressable onPress={() => navigation.goBack()}>
               <Image source={Back} style={styles.img} />
             </Pressable>
             <Text>Checkout</Text>
           </View>
-        </View>
+        </View> */}
         {/* your order */}
         <View style={styles.pad}>
           <YourOrder
@@ -133,9 +133,9 @@ export const Check = () => {
           }}
         >
           <OrangeButton
-            value={"Confirm Order"}
-            sendOrder={sendOrder}
+            value="Confirm Order"
             loading={loading}
+            sendOrder={totalP === 0 ? () => alert("hold on") : sendOrder}
           />
         </View>
       </View>

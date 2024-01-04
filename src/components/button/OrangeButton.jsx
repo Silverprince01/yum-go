@@ -40,8 +40,8 @@ export const OrangeButton = ({
   };
   return (
     <Pressable
-      onPress={loading ? "" : handleRelease}
-      onPressIn={loading ? "" : handlePress}
+      onPress={loading ? () => alert("hold on") : handleRelease}
+      onPressIn={loading ? () => alert("hold on") : handlePress}
       style={[styles.button, isPressed && styles.buttonPressed]}
     >
       {loading ? <ActivityIndicator color={"white"} size="small" /> : null}
@@ -65,7 +65,6 @@ const styles = StyleSheet.create({
   buttonPressed: {
     backgroundColor: "transparent",
     borderColor: "#FF6600",
-    // borderWidth: "2px",
   },
   text: {
     fontSize: 16,

@@ -7,7 +7,7 @@ export const YourOrder = ({ orders, totalP, sume, vendor }) => {
       <Text style={styles.title}>Your Order</Text>
       <View style={styles.body}>
         {/* packs */}
-        {orders?.map((orde, id) => {
+        {orders.map((orde, id) => {
           return (
             <View key={id} style={styles.packBottom}>
               <View style={styles.pack}>
@@ -39,7 +39,7 @@ export const YourOrder = ({ orders, totalP, sume, vendor }) => {
           <View style={styles.pack}>
             <Text style={{ marginVertical: 5, fontSize: 14 }}>Total</Text>
             <Text style={[styles.textPrice, { marginVertical: 5 }]}>
-              #{sume + 200 + Number(vendor?.deliveryFee)}
+              #{totalP ? sume + 200 + Number(vendor?.deliveryFee) : 0}
             </Text>
           </View>
         </View>
@@ -56,7 +56,6 @@ const styles = StyleSheet.create({
   body: {
     backgroundColor: "white",
     borderRadius: 12,
-    // elevation: 6,
     marginVertical: 10,
     elevation: 20,
     shadowColor: "black",

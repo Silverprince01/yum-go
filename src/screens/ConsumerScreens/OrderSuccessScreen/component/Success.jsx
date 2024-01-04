@@ -28,16 +28,6 @@ export const Success = () => {
       >
         <OrangeButton value={"Track Order"} screenName={"Track Order"} />
       </Pressable>
-      <Pressable
-        style={{
-          width: "100%",
-          paddingHorizontal: 10,
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        <OrangeButton value={"Back to Home"} screenName={"Home"} />
-      </Pressable>
     </View>
   );
 };
