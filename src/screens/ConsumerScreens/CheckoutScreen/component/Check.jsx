@@ -20,6 +20,7 @@ export const Check = () => {
   const [totalP, setTotalP] = useState(0);
   const [vendor, setVendor] = useState({});
   const [loading, setLoading] = useState(false);
+  const [accepted, setAccepted] = useState(false);
   const [sume, setSum] = useState(0);
   const navigation = useNavigation();
   const { vendorIdentity } = useContext(AuthContext);
@@ -43,6 +44,7 @@ export const Check = () => {
       setOrders(orderData.data().orderss);
 
       const totalOrder = orderData.data().orderss.map((order) => {
+        setAccepted(order.accepted);
         const multiply = order.order.reduce((acc, item) => {
           return acc + item.count * Number(item.price);
         }, 0);
@@ -81,6 +83,7 @@ export const Check = () => {
             obj.confirmation = true;
             // Add a new value
             obj.total = totalP[id];
+
             obj.accepted = false;
 
             return obj;
@@ -119,7 +122,7 @@ export const Check = () => {
             vendor={vendor}
           />
         </View>
-
+        {accepted && <Text> Your order has been accepted</Text>}
         <View style={styles.pad}>
           <OrderInfo />
         </View>

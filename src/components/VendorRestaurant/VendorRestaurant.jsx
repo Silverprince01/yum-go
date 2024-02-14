@@ -7,6 +7,7 @@ import {
   Text,
   Pressable,
   Animated,
+  ScrollView,
 } from "react-native";
 
 import { useNavigation } from "@react-navigation/native";
@@ -65,8 +66,6 @@ export const VendorRestaurant = () => {
     }
   }, [isVisible]);
 
-  
-
   const addItem = (orderItem) => {
     const existingObjectIndex = orderItems?.findIndex(
       (item) => item.foodName === orderItem.foodName
@@ -77,7 +76,7 @@ export const VendorRestaurant = () => {
       const updatedArray = [...orderItems];
       updatedArray[existingObjectIndex].count =
         (updatedArray[existingObjectIndex].count || 0) + 1;
-        
+
       setOrderItems(updatedArray);
     } else {
       // If the object does not exist, create the count property
@@ -89,9 +88,7 @@ export const VendorRestaurant = () => {
       setOrderItems((prevArray) => [...prevArray, orderItem]);
       // AsyncStorage.setItem("orderItems", JSON.stringify(orderItems));
     }
-    
   };
-  
 
   const proceedToCheckout = async () => {
     setLoading(true);
@@ -156,7 +153,7 @@ export const VendorRestaurant = () => {
         style={styles.imgbackground}
       >
         <Pressable onPress={() => navigation.goBack()}>
-          <Image source={Back} style={styles.arowBack} />
+          <Image source={{ uri: Back }} style={styles.arowBack} />
         </Pressable>
 
         <View style={styles.text}>
@@ -229,55 +226,57 @@ export const VendorRestaurant = () => {
         )}
       </Animated.View>
 
-      {menu?.map((menuItem, id) => {
-        return (
-          <View key={id} style={styles.foodBackground}>
-            <View style={styles.foodBody}>
-              <View style={styles.food}>
-                <View>
-                  <Text style={styles.foodText}>{menuItem.foodName}</Text>
-                  <Text style={styles.foodDesc}>
-                    {menuItem.per === "per portion"
-                      ? "A portion of"
-                      : "A unit of"}{" "}
-                    of {menuItem.foodName}
-                  </Text>
-                  <Text style={styles.foodDesc}>#{menuItem.price}.00</Text>
-                </View>
-                <Pressable
-                  onPress={() => {
-                    addItem(menuItem);
-                    slideIn();
-                  }}
-                  style={styles.foodImg}
-                >
-                  <Image
-                    source={{ uri: menuItem.image }}
-                    style={{ width: 59, height: 36 }}
-                  />
-                  <View style={styles.foodAdd}>
-                    <View>
-                      <Text
-                        style={{
-                          fontSize: 10,
-                          fontWeight: 300,
-                          color: "white",
-                        }}
-                      >
-                        Add
-                      </Text>
-                    </View>
-                    <Image
-                      source={Add}
-                      style={{ width: 10, height: 10, marginLeft: 5 }}
-                    />
+      <ScrollView style={{ marginBottom: 120 }}>
+        {menu?.map((menuItem, id) => {
+          return (
+            <View key={id} style={styles.foodBackground}>
+              <View style={styles.foodBody}>
+                <View style={styles.food}>
+                  <View>
+                    <Text style={styles.foodText}>{menuItem.foodName}</Text>
+                    <Text style={styles.foodDesc}>
+                      {menuItem.per === "per portion"
+                        ? "A portion of"
+                        : "A unit of"}{" "}
+                      of {menuItem.foodName}
+                    </Text>
+                    <Text style={styles.foodDesc}>#{menuItem.price}.00</Text>
                   </View>
-                </Pressable>
+                  <Pressable
+                    onPress={() => {
+                      addItem(menuItem);
+                      slideIn();
+                    }}
+                    style={styles.foodImg}
+                  >
+                    <Image
+                      source={{ uri: menuItem.image }}
+                      style={{ width: 59, height: 36 }}
+                    />
+                    <View style={styles.foodAdd}>
+                      <View>
+                        <Text
+                          style={{
+                            fontSize: 10,
+                            fontWeight: 300,
+                            color: "white",
+                          }}
+                        >
+                          Add
+                        </Text>
+                      </View>
+                      <Image
+                        source={Add}
+                        style={{ width: 10, height: 10, marginLeft: 5 }}
+                      />
+                    </View>
+                  </Pressable>
+                </View>
               </View>
             </View>
-          </View>
-        );
-      })}
+          );
+        })}
+      </ScrollView>
       {/* <View style={{ width: 100, height: 100, backgroundColor: "red" }}> */}
 
       {/* </View> */}

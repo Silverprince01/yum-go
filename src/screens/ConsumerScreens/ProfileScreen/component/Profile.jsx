@@ -1,5 +1,13 @@
-import { StyleSheet, Text, View, Image, ImageBackground } from "react-native";
-import React from "react";
+import {
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  ImageBackground,
+  Pressable,
+  ActivityIndicator,
+} from "react-native";
+import React, { useState } from "react";
 import { NavBar } from "../../../../components/NavBar/NavBar";
 import Frame from "../../../../../assets/frame.png";
 import Edit from "../../../../../assets/edit.png";
@@ -11,12 +19,36 @@ import ProfileIcon from "../../../../../assets/profile.png";
 import Wallet from "../../../../../assets/wallet.png";
 import Document from "../../../../../assets/document.png";
 import Right from "../../../../../assets/arrow-right.png";
+import firebase from "firebase/compat/app";
+import "firebase/auth";
+import { useNavigation } from "@react-navigation/native";
 export const Profile = () => {
+  const navigation = useNavigation();
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const handleLogout = async () => {
+    try {
+      setLoading(true);
+      await firebase
+        .auth()
+        .signOut()
+        .then(() => {
+          setLoading(false);
+          navigation.navigate("Log In");
+        });
+      console.log("User logged out successfully.");
+      // You can navigate to another screen or update your app state as needed.
+    } catch (error) {
+      setError(error.message);
+      setLoading(false);
+      console.error("Error logging out:", error.message);
+    }
+  };
   return (
     <View style={styles.body}>
       <ImageBackground source={Frame} style={styles.imageBackground}>
         <View style={styles.userImageContainer}>
-          <Image source={Man} style={styles.man} />
+          {/* <Image source={Man} style={styles.man} /> */}
           <Image source={Edit} style={styles.edit} />
         </View>
       </ImageBackground>
@@ -28,7 +60,7 @@ export const Profile = () => {
             fontSize: 16,
             paddingHorizontal: 17,
             marginBottom: 10,
-            fontWeight: 600,
+            fontWeight: "600",
           }}
         >
           Personal Profile
@@ -38,7 +70,7 @@ export const Profile = () => {
           <View style={styles.profileFlex}>
             <View style={styles.iconFlex}>
               <Image source={ProfileIcon} style={styles.iconSize} />
-              <Text style={{ fontSize: 16, fontWeight: 600 }}>
+              <Text style={{ fontSize: 16, fontWeight: "600" }}>
                 Profile Details
               </Text>
             </View>
@@ -47,15 +79,16 @@ export const Profile = () => {
           <View style={styles.profileFlex}>
             <View style={styles.iconFlex}>
               <Image source={Document} style={styles.iconSize} />
-              <Text style={{ fontSize: 16, fontWeight: 600 }}>Addresses</Text>
+              <Text style={{ fontSize: 16, fontWeight: "600" }}>Addresses</Text>
             </View>
             <Image source={Right} style={styles.iconSize} />
           </View>
           <View style={styles.iconRight}>
             <View style={styles.iconFlex}>
               <Image source={Wallet} style={styles.iconSize} />
-              <Text style={{ fontSize: 16, fontWeight: 600 }}>Wallets</Text>
+              <Text style={{ fontSize: 16, fontWeight: "600" }}>Wallets</Text>
             </View>
+
             <Image source={Right} style={styles.iconSize} />
           </View>
         </View>
@@ -64,7 +97,7 @@ export const Profile = () => {
           <View style={styles.iconRight}>
             <View style={styles.iconFlex}>
               <Image source={Notification} style={styles.iconSize} />
-              <Text style={{ fontSize: 16, fontWeight: 600 }}>
+              <Text style={{ fontSize: 16, fontWeight: "600" }}>
                 Notification
               </Text>
             </View>
@@ -75,7 +108,7 @@ export const Profile = () => {
           <View style={styles.iconRight}>
             <View style={styles.iconFlex}>
               <Image source={Messages} style={styles.iconSize} />
-              <Text style={{ fontSize: 16, fontWeight: 600 }}>
+              <Text style={{ fontSize: 16, fontWeight: "600" }}>
                 Service Support
               </Text>
             </View>
@@ -83,13 +116,20 @@ export const Profile = () => {
           </View>
         </View>
         <View style={styles.iconContainer}>
-          <View style={styles.iconRight}>
-            <View style={styles.iconFlex}>
-              <Image source={Logout} style={styles.iconSize} />
-              <Text style={{ fontSize: 16, fontWeight: 600 }}>Logout</Text>
+          <Pressable onPress={handleLogout}>
+            <View style={styles.iconRight}>
+              <View style={styles.iconFlex}>
+                <Image source={Logout} style={styles.iconSize} />
+                <Text style={{ fontSize: 16, fontWeight: "600" }}>Logout</Text>
+                <Text style={{ color: "red" }}>{error}</Text>
+              </View>
+              {loading ? (
+                <ActivityIndicator color={"#FF6600"} size="small" />
+              ) : (
+                <Image source={Right} style={styles.iconSize} />
+              )}
             </View>
-            <Image source={Right} style={styles.iconSize} />
-          </View>
+          </Pressable>
         </View>
       </View>
       <View style={{ position: "absolute", bottom: 0, width: "100%" }}>
@@ -114,8 +154,6 @@ const styles = StyleSheet.create({
     height: 80,
     borderRadius: 50,
     backgroundColor: "gray",
-    // borderColor: "red",
-    // borderWidth: 2,
     position: "relative",
   },
   man: {
@@ -136,7 +174,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 17,
     paddingVertical: 5,
     elevation: 10, // For Android; adjust the elevation value as needed
-    
+
     shadowColor: "black", // For iOS
     shadowOffset: { width: 0, height: 2 }, // For iOS; adjust the offset as needed
     shadowOpacity: 0.2, // For iOS; adjust the opacity as needed
@@ -161,11 +199,11 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     paddingHorizontal: 17,
     marginVertical: 10,
-    // elevation: 10, // For Android; adjust the elevation value as needed
-    // shadowColor: "black", // For iOS
-    // shadowOffset: { width: 0, height: 2 }, // For iOS; adjust the offset as needed
-    // shadowOpacity: 0.2, // For iOS; adjust the opacity as needed
-    // shadowRadius: 10,
+    elevation: 10, // For Android; adjust the elevation value as needed
+    shadowColor: "black", // For iOS
+    shadowOffset: { width: 0, height: 2 }, // For iOS; adjust the offset as needed
+    shadowOpacity: 0.2, // For iOS; adjust the opacity as needed
+    shadowRadius: 10,
   },
   iconRight: {
     flexDirection: "row",

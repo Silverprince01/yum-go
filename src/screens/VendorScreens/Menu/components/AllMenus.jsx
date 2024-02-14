@@ -5,7 +5,6 @@ import firebase from "firebase/compat/app";
 import "firebase/auth";
 
 export const AllMenus = () => {
-  const [availability, setAvailability] = useState(true);
   const [menus, setMenus] = useState(null);
   const userId = firebase.auth().currentUser;
   const vendorCollection = firebase.firestore().collection("vendors");
@@ -37,13 +36,6 @@ export const AllMenus = () => {
           <AllMenu
             menu={menu}
             key={id}
-            // key={identity}
-            // id={identity}
-            // foodName={foodName}
-            // per={per}
-            // image={image}
-            // price={price}
-            // availability={availability}
           />
         );
       })}
@@ -66,7 +58,7 @@ const AllMenu = ({ menu }) => {
         <Image source={{ uri: menu.image }} style={{ width: "100%", height: 27 }} />
         <View
           style={[
-            menu.availability
+            menu.available
               ? { backgroundColor: "#FD832A" }
               : { backgroundColor: "#D4C2B5" },
             {
@@ -78,7 +70,7 @@ const AllMenu = ({ menu }) => {
           ]}
         >
           <Text style={{ color: "white", fontSize: 10 }}>
-            {menu.availability ? "Available" : "Unavailaable"}
+            {menu.available ? "Available" : "Unavailaable"}
           </Text>
         </View>
       </View>

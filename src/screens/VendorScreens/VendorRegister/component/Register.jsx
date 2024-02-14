@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import {
+  ScrollView,
   View,
   Text,
   TextInput,
@@ -93,151 +94,148 @@ export const Register = () => {
   const handleLogin = () => {
     navigation.navigate("Vendor Login");
   };
-  const keyboardVerticalOffset = Platform.OS === "ios" ? 40 : 0;
+  // const keyboardVerticalOffset = Platform.OS === "ios" ? 40 : 0;
 
   return (
-    <View style={styles.body}>
-      <KeyboardAvoidingView
+    <ScrollView style={styles.body}>
+      {/* <KeyboardAvoidingView
         behavior="padding"
         style={{ backgroundColor: "white", flex: 1 }}
         keyboardVerticalOffset={keyboardVerticalOffset}
-      >
-        <Text style={styles.header}>Register your Canteen</Text>
+      > */}
+      <Text style={styles.header}>Register your Canteen</Text>
+
+      <View>
+        <Text style={{ fontSize: 16, textAlign: "center", fontWeight: "500" }}>
+          Vendor Information
+        </Text>
+        <View>
+          <Text style={styles.inputText}>Full Name</Text>
+          <TextInput
+            value={namee}
+            style={styles.input}
+            placeholder="Your Name"
+            onChangeText={setName}
+            placeholderTextColor={"#0000004D"}
+          />
+        </View>
+        <View>
+          <Text style={styles.inputText}>Business Name</Text>
+          <TextInput
+            value={businessName}
+            style={styles.input}
+            placeholder="Your Name"
+            onChangeText={setBusinessName}
+            placeholderTextColor={"#0000004D"}
+          />
+        </View>
+        <View>
+          <Text style={styles.inputText}>Phone Number</Text>
+          <TextInput
+            // onChange={handleChange}
+            value={phone}
+            style={styles.input}
+            placeholder="Phone Number"
+            onChangeText={setPhone}
+            placeholderTextColor={"#0000004D"}
+          />
+        </View>
+        <View>
+          <Text style={styles.inputText}>Email Address</Text>
+          <TextInput
+            style={styles.input}
+            value={email}
+            placeholder="Your Email"
+            onChangeText={setEmail}
+            placeholderTextColor={"#0000004D"}
+          />
+        </View>
+        <View>
+          <Text style={styles.inputText}>Address</Text>
+          <TextInput
+            style={styles.input}
+            value={address}
+            placeholder="Address"
+            onChangeText={setAddress}
+            placeholderTextColor={"#0000004D"}
+          />
+        </View>
 
         <View>
-          <Text
-            style={{ fontSize: 16, textAlign: "center", fontWeight: "500" }}
-          >
-            Vendor Information
+          <Text style={[styles.inputText, { marginTop: 10 }]}>
+            Canteen Logo
           </Text>
-          <View>
-            <Text style={styles.inputText}>Full Name</Text>
-            <TextInput
-              value={namee}
-              style={styles.input}
-              placeholder="Your Name"
-              onChangeText={setName}
-              placeholderTextColor={"#0000004D"}
-            />
-          </View>
-          <View>
-            <Text style={styles.inputText}>Business Name</Text>
-            <TextInput
-              value={businessName}
-              style={styles.input}
-              placeholder="Your Name"
-              onChangeText={setBusinessName}
-              placeholderTextColor={"#0000004D"}
-            />
-          </View>
-          <View>
-            <Text style={styles.inputText}>Phone Number</Text>
-            <TextInput
-              // onChange={handleChange}
-              value={phone}
-              style={styles.input}
-              placeholder="Phone Number"
-              onChangeText={setPhone}
-              placeholderTextColor={"#0000004D"}
-            />
-          </View>
-          <View>
-            <Text style={styles.inputText}>Email Address</Text>
-            <TextInput
-              style={styles.input}
-              value={email}
-              placeholder="Your Email"
-              onChangeText={setEmail}
-              placeholderTextColor={"#0000004D"}
-            />
-          </View>
-          <View>
-            <Text style={styles.inputText}>Address</Text>
-            <TextInput
-              style={styles.input}
-              value={address}
-              placeholder="Address"
-              onChangeText={setAddress}
-              placeholderTextColor={"#0000004D"}
-            />
-          </View>
-
-          <View>
-            <Text style={[styles.inputText, { marginTop: 10 }]}>
-              Canteen Logo
-            </Text>
-            <Pressable
-              style={{
-                backgroundColor: "#A3A1A166",
-                width: "100%",
-                height: 131,
-                justifyContent: "center",
-                alignItems: "center",
-                borderRadius: 12,
-                marginVertical: 10,
-              }}
-              onPress={pickImage}
-            >
-              {image ? (
-                <Image
-                  source={image}
-                  style={{ width: "100%", height: "100%", borderRadius: 12 }}
-                />
-              ) : (
-                <Image source={Camera} style={{ width: 46, height: 42 }} />
-              )}
-            </Pressable>
-          </View>
-          <View style={{ marginTop: 20 }}>
-            <View>
-              <Text style={styles.inputText}>Minimum Order</Text>
-              <TextInput
-                style={styles.input}
-                value={minOrder}
-                placeholder="Min Order"
-                onChangeText={setMinOrder}
-                placeholderTextColor={"#0000004D"}
+          <Pressable
+            style={{
+              backgroundColor: "#A3A1A166",
+              width: "100%",
+              height: 131,
+              justifyContent: "center",
+              alignItems: "center",
+              borderRadius: 12,
+              marginVertical: 10,
+            }}
+            onPress={pickImage}
+          >
+            {image ? (
+              <Image
+                source={{ uri: image }}
+                style={{ width: "100%", height: "100%", borderRadius: 12 }}
               />
-            </View>
-            <View>
-              <Text style={styles.inputText}>Delivery Fee</Text>
-              <TextInput
-                style={styles.input}
-                value={deliveryFee}
-                placeholder="Delivery Fee"
-                onChangeText={setDeliveryFee}
-                placeholderTextColor={"#0000004D"}
-              />
-            </View>
-          </View>
-          <Text style={{ color: "red" }}>{errormessage}</Text>
-        </View>
-
-        <View style={styles.login}>
-          <Text>Already have an account?</Text>
-          <Pressable onPress={handleLogin}>
-            <Text style={styles.loginText}>Log in</Text>
+            ) : (
+              <Image source={Camera} style={{ width: 46, height: 42 }} />
+            )}
           </Pressable>
         </View>
+        <View style={{ marginTop: 20 }}>
+          <View>
+            <Text style={styles.inputText}>Minimum Order</Text>
+            <TextInput
+              style={styles.input}
+              value={minOrder}
+              placeholder="Min Order"
+              onChangeText={setMinOrder}
+              placeholderTextColor={"#0000004D"}
+            />
+          </View>
+          <View>
+            <Text style={styles.inputText}>Delivery Fee</Text>
+            <TextInput
+              style={styles.input}
+              value={deliveryFee}
+              placeholder="Delivery Fee"
+              onChangeText={setDeliveryFee}
+              placeholderTextColor={"#0000004D"}
+            />
+          </View>
+        </View>
+        <Text style={{ color: "red" }}>{errormessage}</Text>
+      </View>
 
+      <View style={styles.login}>
+        <Text>Already have an account?</Text>
+        <Pressable onPress={handleLogin}>
+          <Text style={styles.loginText}>Log in</Text>
+        </Pressable>
+      </View>
+      <View style={{ marginBottom: 20 }}>
         <TransparentButton
           value="Register"
           loading={loading}
-          register={ register}
+          register={register}
         />
-      </KeyboardAvoidingView>
-    </View>
+      </View>
+      {/* </KeyboardAvoidingView> */}
+    </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
   body: {
-    flex: 1,
     width: "100%",
-    height: "auto",
+
     paddingHorizontal: 18,
-    position: "absolute",
-    top: 200,
+
     paddingVertical: 13,
     backgroundColor: "white",
     borderRadius: 30,
@@ -247,7 +245,7 @@ const styles = StyleSheet.create({
     color: "#FD6A00",
     fontSize: 24,
     fontWeight: "700",
-    marginBottom: 20,
+    marginVertical: 20,
   },
   inputContainer: {
     position: "relative",

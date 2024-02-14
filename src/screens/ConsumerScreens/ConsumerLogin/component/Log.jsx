@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { View, Text, TextInput, StyleSheet, Pressable } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { OrangeButton } from "../../../../components/button/OrangeButton";
@@ -14,13 +14,24 @@ export const Log = () => {
   const [password, setPassword] = useState("");
   const [errormessage, setErrorMessage] = useState("");
 
+  useEffect(() => {
+    const disableSwipeBack = () => {
+      navigation.canGoBack(false);
+    };
+
+    // Disable swipe back gesture when the component mounts
+    disableSwipeBack();
+  }, [navigation]);
+
   const handleLogin = async () => {
     setLoading(true);
     firebase
       .auth()
       .signInWithEmailAndPassword(email.trim(), password.trim())
       .then(() => {
-        setLoading(false)
+        setLoading(false);
+        setEmail("")
+        setPassword("")
         navigation.navigate("Home");
       })
       .catch((error) => {
@@ -79,7 +90,7 @@ export const Log = () => {
         <OrangeButton
           value="Log In"
           loading={loading}
-          handleLogin={ handleLogin}
+          handleLogin={handleLogin}
         />
       </View>
     </View>

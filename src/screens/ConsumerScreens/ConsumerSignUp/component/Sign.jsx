@@ -178,7 +178,7 @@ const styles = StyleSheet.create({
     color: "#FD6A00",
     fontSize: 24,
     fontWeight: "700",
-    marginBottom: 20,
+    marginVertical: 20,
   },
   inputContainer: {
     position: "relative",

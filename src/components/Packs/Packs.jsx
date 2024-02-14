@@ -1,5 +1,11 @@
 import React, { useState, useEffect, useContext } from "react";
-import { View, Text, StyleSheet, Pressable } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Pressable,
+  ActivityIndicator,
+} from "react-native";
 import firebase from "firebase/compat/app";
 import { database } from "../../firebaseConfig";
 import { AuthContext } from "../../screens/ConsumerScreens/Authentication";
@@ -7,6 +13,7 @@ export const Packs = () => {
   const { vendorIdentity } = useContext(AuthContext);
   const [vendorId, setVendorId] = vendorIdentity;
   const [orders, setOrders] = useState([]);
+  const [acceepted, setAccepted] = useState(false);
   const [loading, setLoading] = useState(false);
 
   const [totalP, setTotalP] = useState(0);
@@ -33,6 +40,7 @@ export const Packs = () => {
       setTotalP(totalOrder);
 
       orderData.data().orderss.forEach((orde) => {
+        setAccepted(orde?.accepted);
         orde?.order.forEach((ord) => {
           setVendorId(ord.to);
         });
@@ -79,88 +87,96 @@ export const Packs = () => {
   }, []);
 
   return (
-    <View style={{ flex: 1 }}>
-      <Text
-        style={{
-          fontSize: 20,
-          fontWeight: 500,
-          marginBottom: 20,
-          paddingHorizontal: 17,
-        }}
-      >
-        Your Order
-      </Text>
-      <View style={{ flex: 1, paddingBottom: 40 }}>
-        {loading ? (
-          <View style={{ justifyContent: "center", alignItems: "center" }}>
-            <Text style={{ fontSize: 20, fontWeight: "600" }}>
-              
-              No current order
-            </Text>
-          </View>
-        ) : (
-          orders?.map((orde, id) => {
-            return (
-              <View key={id} style={styles.body}>
-                <View style={styles.bottomBorder}>
-                  <View
-                    style={{
-                      paddingHorizontal: 17,
-                      paddingVertical: 10,
-                      justifyContent: "space-between",
-                      flexDirection: "row",
-                    }}
-                  >
-                    <Text style={{ fontSize: 16, fontWeight: 500 }}>
-                      Pack {id + 1}
-                    </Text>
-                    <Pressable onPress={() => removeOrder(orde, id)}>
-                      <Text style={{ color: "#FF6600" }}>Remove </Text>
-                    </Pressable>
-                  </View>
-                </View>
-                {/* food items */}
-
-                {orde.order.map((pac, id) => {
-                  return (
-                    <View key={id} style={styles.foodItem}>
-                      <View>
-                        <View>
-                          <Text style={{ fontSize: 12, fontWeight: 500 }}>
-                            {pac.foodName}
-                          </Text>
-                          <Text style={{ fontSize: 10, fontWeight: 300 }}>
-                            {pac.per === "per portion"
-                              ? "A portion of"
-                              : "A unit of"}
-                            {pac.foodName}
-                          </Text>
-                          <Text style={{ fontSize: 10, fontWeight: 300 }}>
-                            # {pac.price}
-                          </Text>
-                        </View>
-                      </View>
-                      <View style={styles.priceBox}>
-                        <Text style={styles.number}>x{pac.count}</Text>
-                        <View style={styles.price}>
-                          <Text style={{ color: "white", fontSize: 12 }}>
-                            #{pac.price}
-                          </Text>
-                        </View>
+    <View>
+      {acceepted ? (
+        <View style={styles.accept}>
+          <Text style={{ fontSize: 20 }}>Your order has been accepted</Text>
+        </View>
+      ) : (
+        <View style={{ flex: 1 }}>
+          <Text
+            style={{
+              fontSize: 20,
+              fontWeight: 500,
+              marginBottom: 20,
+              paddingHorizontal: 17,
+            }}
+          >
+            Your Order
+          </Text>
+          <View style={{ flex: 1, paddingBottom: 40 }}>
+            {loading ? (
+              <View style={{ justifyContent: "center", alignItems: "center" }}>
+                <ActivityIndicator color={"#FF6600"} size={"large"} />
+                <Text style={{ fontSize: 20, fontWeight: "600" }}>
+                  Loading...
+                </Text>
+              </View>
+            ) : (
+              orders?.map((orde, id) => {
+                return (
+                  <View key={id} style={styles.body}>
+                    <View style={styles.bottomBorder}>
+                      <View
+                        style={{
+                          paddingHorizontal: 17,
+                          paddingVertical: 10,
+                          justifyContent: "space-between",
+                          flexDirection: "row",
+                        }}
+                      >
+                        <Text style={{ fontSize: 16, fontWeight: 500 }}>
+                          Pack {id + 1}
+                        </Text>
+                        <Pressable onPress={() => removeOrder(orde, id)}>
+                          <Text style={{ color: "#FF6600" }}>Remove </Text>
+                        </Pressable>
                       </View>
                     </View>
-                  );
-                })}
-                {/* total */}
-                <View style={styles.total}>
-                  <Text>Total</Text>
-                  <Text>#{totalP[id]}</Text>
-                </View>
-              </View>
-            );
-          })
-        )}
-      </View>
+                    {/* food items */}
+
+                    {orde.order.map((pac, id) => {
+                      return (
+                        <View key={id} style={styles.foodItem}>
+                          <View>
+                            <View>
+                              <Text style={{ fontSize: 12, fontWeight: 500 }}>
+                                {pac.foodName}
+                              </Text>
+                              <Text style={{ fontSize: 10, fontWeight: 300 }}>
+                                {pac.per === "per portion"
+                                  ? "A portion of"
+                                  : "A unit of"}
+                                {pac.foodName}
+                              </Text>
+                              <Text style={{ fontSize: 10, fontWeight: 300 }}>
+                                # {pac.price}
+                              </Text>
+                            </View>
+                          </View>
+                          <View style={styles.priceBox}>
+                            <Text style={styles.number}>x{pac.count}</Text>
+                            <View style={styles.price}>
+                              <Text style={{ color: "white", fontSize: 12 }}>
+                                #{pac.price}
+                              </Text>
+                            </View>
+                          </View>
+                        </View>
+                      );
+                    })}
+                    {/* total */}
+                    <View style={styles.total}>
+                      <Text>Total</Text>
+                      <Text>#{totalP[id]}</Text>
+                    </View>
+                  </View>
+                );
+              })
+            )}
+          </View>
+        </View>
+      )}
     </View>
   );
 };
@@ -181,6 +197,10 @@ const styles = StyleSheet.create({
   },
   order: {
     paddingHorizontal: 17,
+  },
+  accept: {
+    justifyContent: "center",
+    alignItems: "center",
   },
   foodItem: {
     borderBottomColor: "#C4C4C4",

@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import firebase from "firebase/compat/app";
 import { database } from "../../firebaseConfig";
 import {
@@ -101,7 +101,10 @@ export const Recent = () => {
               }}
               style={styles.vendorContainer}
             >
-              <Image source={{ uri: vendor.image }} style={styles.foodImage} />
+              <Image
+                source={vendor.image ? { uri: vendor.image } : Clock}
+                style={styles.foodImage}
+              />
               <Text style={styles.vendorName}>{vendor.businessName}</Text>
               <View style={styles.order}>
                 <Text style={styles.orderText}>Min-Order</Text>
@@ -114,8 +117,6 @@ export const Recent = () => {
             </Pressable>
           );
         })}
-
-        
       </ScrollView>
     </View>
   );
@@ -151,7 +152,6 @@ const styles = StyleSheet.create({
     marginTop: 5,
   },
   order: {
-    
     justifyContent: "space-between",
     flexDirection: "row",
   },

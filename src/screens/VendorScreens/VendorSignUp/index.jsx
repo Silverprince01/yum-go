@@ -6,10 +6,10 @@ import { Sign } from "./component/Sign";
 export const VendorSignUp = () => {
 	return (
 		<View style={styles.body}>
-			<ScrollView>
+			
 				<FoodSlide />
 				<Sign />
-			</ScrollView>
+			
 		</View>
 	);
 };
@@ -17,6 +17,5 @@ export const VendorSignUp = () => {
 const styles = StyleSheet.create({
 	body: {
 		flex: 1,
-		position: "relative",
 	},
 });

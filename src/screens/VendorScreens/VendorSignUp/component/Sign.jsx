@@ -5,6 +5,7 @@ import {
   TextInput,
   StyleSheet,
   Pressable,
+  ScrollView,
   KeyboardAvoidingView,
   Platform,
 } from "react-native";
@@ -49,78 +50,62 @@ export const Sign = () => {
   const handleLogin = () => {
     navigation.navigate("Vendor Login");
   };
-  const keyboardVerticalOffset = Platform.OS === "ios" ? 10 : 0;
+  // const keyboardVerticalOffset = Platform.OS === "ios" ? 10 : 0;
 
   return (
-    <View style={styles.body}>
-      <KeyboardAvoidingView
-        behavior="position"
-        style={{ backgroundColor: "white", flex: 1 }}
-        keyboardVerticalOffset={keyboardVerticalOffset}
-      >
-        <Text style={styles.header}>Create Account</Text>
+    <ScrollView style={styles.body}>
+      
+      <Text style={styles.header}>Create Account</Text>
 
-        <View>
-          <View>
-            <Text style={styles.inputText}>Email Address</Text>
-            <TextInput
-              style={styles.input}
-              value={email}
-              placeholder="Your Email"
-              onChangeText={setEmail}
-              placeholderTextColor={"#0000004D"}
-            />
-          </View>
-          <View>
-            <Text style={styles.inputText}>Password</Text>
-            <TextInput
-              style={styles.input}
-              value={password}
-              onChangeText={setPassword}
-              placeholder="Password"
-              secureTextEntry={true}
-              placeholderTextColor={"#0000004D"}
-            />
-          </View>
-          <View>
-            <Text style={styles.inputText}>Confirm Password</Text>
-            <TextInput
-              style={styles.input}
-              onChangeText={setConfirmPassword}
-              value={confirmPassword}
-              placeholder="Password"
-              secureTextEntry={true}
-              placeholderTextColor={"#0000004D"}
-            />
-            <Text style={{ color: "red" }}>{errormessage}</Text>
-          </View>
-        </View>
-        <View style={styles.login}>
-          <Text>Already have an account?</Text>
-          <Pressable onPress={handleLogin}>
-            <Text style={styles.loginText}>Log in</Text>
-          </Pressable>
-        </View>
-      </KeyboardAvoidingView>
-      <View
-        style={{
-          position: "absolute",
-          bottom: 30,
-          width: "110%",
-          paddingHorizontal: 10,
-        }}
-      >
-        <TransparentButton
-          value="Sign UP"
-          loading={loading}
-          signUp={
-            password === confirmPassword
-              ? vendorSignUp
-              : () => setErrorMessage("Your password does not match")
-          }
+      <View>
+        <Text style={styles.inputText}>Email Address</Text>
+        <TextInput
+          style={styles.input}
+          placeholder="Your Email"
+          placeholderTextColor={"#0000004D"}
+          value={email}
+          onChangeText={setEmail}
         />
       </View>
-    </View>
+      <View>
+        <Text style={styles.inputText}>Passsword</Text>
+        <TextInput
+          style={styles.input}
+          placeholder="Input Password"
+          placeholderTextColor={"#0000004D"}
+          value={password}
+          onChangeText={setPassword}
+        />
+      </View>
+      <View>
+        <Text style={styles.inputText}>Confirm Password</Text>
+        <TextInput
+          style={styles.input}
+          placeholder="Confirm Password"
+          placeholderTextColor={"#0000004D"}
+          value={confirmPassword}
+          onChangeText={setConfirmPassword}
+        />
+      </View>
+      <Text style={{ color: "red" }}>{errormessage}</Text>
+      <View style={styles.login}>
+        <Text>Already have an account?</Text>
+        <Pressable onPress={handleLogin}>
+          <Text style={styles.loginText}>Log in</Text>
+        </Pressable>
+      </View>
+      
+      <TransparentButton
+        value="Sign UP"
+        loading={loading}
+        vendorSignUp={
+          password === confirmPassword
+            ? vendorSignUp
+            : () => setErrorMessage("Your password does not match")
+        }
+      />
+      
+    </ScrollView>
   );
 };
 
@@ -128,19 +113,15 @@ const styles = StyleSheet.create({
   body: {
     width: "100%",
     paddingHorizontal: 18,
-    position: "absolute",
-    top: 185,
-    paddingVertical: 13,
+    paddingBottom: 25,
     backgroundColor: "white",
-    borderRadius: 30,
     fontSize: 16,
-    // height: 500,
   },
   header: {
     color: "#FD6A00",
     fontSize: 24,
     fontWeight: "700",
-    marginBottom: 20,
+    marginVertical: 20,
   },
   inputContainer: {
     position: "relative",

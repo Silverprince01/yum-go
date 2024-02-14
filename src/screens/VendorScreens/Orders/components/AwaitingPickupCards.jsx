@@ -13,7 +13,7 @@ export const AwaitingPickupCards = ({ orders }) => {
   );
 };
 
-const AwaitingPickupsCard = ({ order, key }) => {
+const AwaitingPickupsCard = ({ order }) => {
   const [consumer, setConsumer] = useState({});
   const vendorId = firebase.auth().currentUser;
 
@@ -43,7 +43,7 @@ const AwaitingPickupsCard = ({ order, key }) => {
   }, []);
   return (
     <View>
-      {/* {accepted && ( */}
+      {accepted && (
         <View >
           {confirm === true && (
             <View style={styles.cardWrapper}>
@@ -109,7 +109,7 @@ const AwaitingPickupsCard = ({ order, key }) => {
             </View>
           )}
         </View>
-      {/* )} */}
+       )} 
     </View>
   );
 };

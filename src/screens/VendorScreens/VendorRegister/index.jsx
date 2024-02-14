@@ -6,10 +6,8 @@ import { Register } from "./component/Register";
 export const VendorRegister = () => {
   return (
     <View style={styles.body}>
-      <ScrollView>
-        <FoodSlide />
-        <Register />
-      </ScrollView>
+      <FoodSlide />
+      <Register />
     </View>
   );
 };
@@ -17,6 +15,5 @@ export const VendorRegister = () => {
 const styles = StyleSheet.create({
   body: {
     flex: 1,
-    position: "relative",
   },
 });

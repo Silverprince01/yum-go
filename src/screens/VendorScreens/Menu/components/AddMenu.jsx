@@ -6,10 +6,11 @@ import {
   Image,
   ScrollView,
   Pressable,
+  Animated
 } from "react-native";
 import { Picker } from "@react-native-picker/picker";
 import firebase from "firebase/compat/app";
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 
 import Camera from "../../../../../assets/camera.png";
 import { OrangeButton } from "../../../../components/button/OrangeButton";
@@ -17,13 +18,42 @@ import { OrangeButton } from "../../../../components/button/OrangeButton";
 import { database } from "../../../../firebaseConfig";
 import * as ImagePicker from "expo-image-picker";
 export const AddMenu = ({ uid }) => {
-  
-
   const [loading, setLoading] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
+  const [error, setError] = useState("")
+  const slideAnimation = useRef(new Animated.Value(0)).current;
+
+  const slideIn = () => {
+    setIsVisible(true);
+    Animated.timing(slideAnimation, {
+      toValue: 1,
+      duration: 500, // Adjust the duration as needed
+      useNativeDriver: false,
+    }).start();
+  };
+
+  const slideOut = () => {
+    Animated.timing(slideAnimation, {
+      toValue: 0,
+      duration: 500, // Adjust the duration as needed
+      useNativeDriver: false,
+    }).start(() => {
+      setIsVisible(false);
+    });
+  };
+
+  useEffect(() => {
+    if (isVisible) {
+      const timeoutId = setTimeout(() => {
+        slideOut();
+      }, 2000);
+      return () => clearTimeout(timeoutId);
+    }
+  }, [isVisible]);
+
   const [menuDesc, setMenuDesc] = useState({
     foodName: "",
     category: "",
-    description: "",
     per: "per portion",
     price: "",
     image: null,
@@ -49,15 +79,16 @@ export const AddMenu = ({ uid }) => {
         setMenuDesc({
           foodName: "",
           category: "",
-          description: "",
           per: "per portion",
           price: "",
           image: null,
           available: true,
         })
+        slideIn()
       })
       .catch((error) => {
         setLoading(false);
+        setError(error.message)
         console.error("Error adding document: ", error);
       });
   };
@@ -67,7 +98,7 @@ export const AddMenu = ({ uid }) => {
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
       allowsEditing: true,
-      aspect: [4, 3],
+      aspect: [1, 1],
       quality: 1,
     });
 
@@ -79,22 +110,43 @@ export const AddMenu = ({ uid }) => {
   };
   return (
     <ScrollView style={styles.body}>
+      <Animated.View
+        style={{
+          position: "absolute",
+          top: 0,
+          right: 0,
+          zIndex: 5,
+          transform: [
+            {
+              translateY: slideAnimation.interpolate({
+                inputRange: [0, 10],
+                outputRange: [50, 0],
+              }),
+            },
+          ],
+        }}
+      >
+        {isVisible && (
+          <View
+            style={{
+              backgroundColor: "#FF6600",
+              padding: 20,
+              borderRadius: 8,
+              width:250,
+              justifyContent:"center"
+            }}
+          >
+            <Text>Food Item Added</Text>
+          </View>
+        )}
+      </Animated.View>
+
       <View style={{ marginVertical: 10 }}>
         <Text style={{ fontSize: 16, fontWeight: "500", marginBottom: 10 }}>
-          Category
+          Food Name (e.g rice, beans)
         </Text>
         <TextInput
-          style={styles.input}
-          onChangeText={(newValue) =>
-            setMenuDesc((prev) => ({ ...prev, category: newValue }))
-          }
-        />
-      </View>
-      <View style={{ marginVertical: 10 }}>
-        <Text style={{ fontSize: 16, fontWeight: "500", marginBottom: 10 }}>
-          Name
-        </Text>
-        <TextInput
+          value={menuDesc.foodName}
           style={styles.input}
           onChangeText={(newValue) =>
             setMenuDesc((prev) => ({ ...prev, foodName: newValue }))
@@ -118,6 +170,7 @@ export const AddMenu = ({ uid }) => {
               paddingHorizontal: 15,
               paddingVertical: 10,
             }}
+            value={menuDesc.price}
             onChangeText={(newValue) =>
               setMenuDesc((prev) => ({ ...prev, price: newValue }))
             }
@@ -142,21 +195,9 @@ export const AddMenu = ({ uid }) => {
               <Picker.Item label="per portion" value="per portion" />
               <Picker.Item label="per unit" value="per unit" />
             </Picker>
-
-           
           </View>
         </View>
-        <View style={{ marginVertical: 10 }}>
-          <Text style={{ fontSize: 16, fontWeight: "500", marginBottom: 10 }}>
-            Description
-          </Text>
-          <TextInput
-            style={[styles.input, { height: 90 }]}
-            onChangeText={(newValue) =>
-              setMenuDesc((prev) => ({ ...prev, description: newValue }))
-            }
-          />
-        </View>
+        
 
         <View style={{ marginVertical: 10 }}>
           <Text style={{ fontSize: 16, fontWeight: "500" }}>Add Image</Text>
@@ -175,7 +216,7 @@ export const AddMenu = ({ uid }) => {
           >
             {menuDesc.image ? (
               <Image
-                source={menuDesc.image}
+                source={{ uri: menuDesc.image }}
                 style={{ width: "100%", height: "100%", borderRadius: 12 }}
               />
             ) : (
@@ -191,6 +232,8 @@ export const AddMenu = ({ uid }) => {
           loading={loading}
         />
       </View>
+
+      <Text>{error}</Text>
     </ScrollView>
   );
 };
